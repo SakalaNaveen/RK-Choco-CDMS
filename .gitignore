@@ -1,0 +1,62 @@
+# Dependencies
+node_modules/
+**/node_modules/
+
+# Environment variables and secrets
+.env
+.env.*
+!.env.example
+**/.env
+**/.env.*
+
+# Build files
+build/
+dist/
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+*.log
+
+# Runtime data
+backend/data/admin.json
+
+# ZIP and duplicate folders
+frontend-zip/
+frontend-zip.zip
+
+# Unwanted files
+curl.exe
+node
+taskkill
+{
+{})
+
+# OS files
+.DS_Store
+Thumbs.db
+# Environment files - NEVER upload passwords
+.env
+.env.*
+**/.env
+**/.env.*
+
+# Node modules
+node_modules/
+**/node_modules/
+
+# Build files
+build/
+dist/
+
+# Logs
+*.log
+
+# Private backup files
+backend/data/admin-backup.json
+backend/server.backup.js
+backend/test-*.js
+
+# Downloaded reference files
+frontend/src/assets/images/Chocolate Distribution System.html
+frontend/src/assets/images/Chocolate Distribution System_files/

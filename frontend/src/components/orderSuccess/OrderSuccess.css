@@ -1,0 +1,504 @@
+.success-page {
+  min-height: 100vh;
+  background: linear-gradient(
+    135deg,
+    #fffaf0,
+    #f8e2b8
+  );
+
+  padding: 45px 20px;
+
+  box-sizing: border-box;
+
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+
+.success-card {
+  width: 100%;
+  max-width: 760px;
+
+  background: #ffffff;
+
+  border: 1px solid #e7cfa9;
+
+  border-radius: 28px;
+
+  padding: 42px 45px;
+
+  text-align: center;
+
+  box-shadow:
+    0 18px 50px
+    rgba(92, 55, 20, 0.10);
+
+  box-sizing: border-box;
+}
+
+
+/* ================================
+   SUCCESS ICON
+================================ */
+
+.success-icon-wrapper {
+  position: relative;
+
+  width: 82px;
+  height: 82px;
+
+  margin: 0 auto 18px;
+}
+
+
+.success-icon {
+  width: 82px;
+  height: 82px;
+
+  color: #25a55b;
+}
+
+
+.success-sparkle {
+  position: absolute;
+
+  color: #d39a3b;
+
+  font-size: 18px;
+}
+
+
+.sparkle-one {
+  top: 2px;
+  left: -20px;
+}
+
+
+.sparkle-two {
+  right: -20px;
+  bottom: 2px;
+}
+
+
+/* ================================
+   LABEL
+================================ */
+
+.success-label {
+  color: #159dcc;
+
+  font-weight: 800;
+
+  letter-spacing: 4px;
+
+  font-size: 14px;
+
+  margin-bottom: 8px;
+}
+
+
+/* ================================
+   TITLE
+================================ */
+
+.success-card h1 {
+  color: #6b2d1c;
+
+  font-family:
+    Georgia,
+    serif;
+
+  font-weight: 500;
+
+  font-size: 36px;
+
+  margin:
+    0 0 10px;
+}
+
+
+/* ================================
+   DIVIDER
+================================ */
+
+.success-divider {
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  gap: 12px;
+
+  margin:
+    8px 0 14px;
+}
+
+
+.success-divider span:not(.divider-symbol) {
+  height: 1px;
+
+  width: 120px;
+
+  background: #d8c09b;
+}
+
+
+.divider-symbol {
+  color: #c49350;
+
+  font-size: 18px;
+}
+
+
+/* ================================
+   THANK YOU
+================================ */
+
+.thank-you-title {
+  color: #5e392a;
+
+  font-family:
+    Georgia,
+    serif;
+
+  font-size: 20px;
+
+  font-weight: 600;
+
+  margin:
+    0 0 22px;
+
+  display: flex;
+
+  justify-content: center;
+
+  align-items: center;
+
+  gap: 12px;
+}
+
+
+.thank-you-title span {
+  color: #c49350;
+}
+
+
+/* ================================
+   MAIN MESSAGE
+================================ */
+
+.success-main-message {
+  margin-bottom: 22px;
+}
+
+
+.success-notification {
+  width: 100%;
+
+  box-sizing: border-box;
+
+  background: #f8fbf8;
+
+  border: 1px solid #dce9df;
+
+  border-radius: 12px;
+
+  padding: 14px 16px;
+
+  display: flex;
+
+  align-items: flex-start;
+
+  gap: 12px;
+
+  text-align: left;
+
+  color: #43574b;
+}
+
+
+.success-notification > svg {
+  color: #25a55b;
+
+  font-size: 20px;
+
+  margin-top: 2px;
+
+  flex-shrink: 0;
+}
+
+
+.success-notification strong {
+  display: block;
+
+  font-size: 14px;
+
+  line-height: 1.5;
+}
+
+
+.success-notification small {
+  display: block;
+
+  margin-top: 3px;
+
+  font-size: 12px;
+
+  color: #718077;
+}
+
+
+/* ================================
+   ORDER INFORMATION
+================================ */
+
+.order-information {
+  border: 1px solid #ead4b1;
+
+  border-radius: 16px;
+
+  overflow: hidden;
+
+  background: #fffdf9;
+
+  margin-bottom: 18px;
+}
+
+
+.order-info-row {
+  min-height: 58px;
+
+  padding: 14px 18px;
+
+  box-sizing: border-box;
+
+  display: flex;
+
+  justify-content: space-between;
+
+  align-items: center;
+
+  gap: 20px;
+
+  border-bottom:
+    1px solid #ead4b1;
+}
+
+
+.order-info-row:last-child {
+  border-bottom: none;
+}
+
+
+.order-info-left {
+  display: flex;
+
+  align-items: center;
+
+  gap: 10px;
+
+  color: #686868;
+
+  font-weight: 600;
+
+  font-size: 14px;
+
+  text-align: left;
+}
+
+
+.order-info-left svg {
+  color: #c88a2d;
+
+  flex-shrink: 0;
+}
+
+
+.order-info-row strong {
+  color: #444444;
+
+  font-size: 14px;
+
+  text-align: right;
+
+  word-break: break-word;
+}
+
+
+.order-info-row .order-status {
+  color: #25a55b;
+}
+
+
+/* ================================
+   DELIVERY NOTIFICATION
+================================ */
+
+.delivery-notification {
+  width: 100%;
+
+  box-sizing: border-box;
+
+  background: #fff8e9;
+
+  border:
+    1px solid #ead4b1;
+
+  border-radius: 10px;
+
+  padding: 12px 15px;
+
+  display: flex;
+
+  justify-content: center;
+
+  align-items: center;
+
+  gap: 9px;
+
+  color: #6b5a3e;
+
+  font-size: 13px;
+
+  margin-bottom: 22px;
+}
+
+
+.delivery-notification svg {
+  color: #c49350;
+}
+
+
+/* ================================
+   BUTTONS
+================================ */
+
+.success-buttons {
+  display: flex;
+
+  justify-content: center;
+
+  gap: 12px;
+
+  flex-wrap: wrap;
+}
+
+
+.success-buttons button {
+  min-width: 190px;
+
+  border-radius: 11px;
+
+  padding:
+    13px 20px;
+
+  font-size: 14px;
+
+  font-weight: 800;
+
+  cursor: pointer;
+
+  display: inline-flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  gap: 8px;
+
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+
+.success-buttons button:hover {
+  transform:
+    translateY(-2px);
+
+  box-shadow:
+    0 8px 18px
+    rgba(0, 0, 0, 0.10);
+}
+
+
+.success-shopping {
+  border: none;
+
+  background: #159dcc;
+
+  color: #ffffff;
+}
+
+
+.success-orders {
+  border:
+    1px solid #159dcc;
+
+  background: #ffffff;
+
+  color: #087ca8;
+}
+
+
+/* ================================
+   MOBILE
+================================ */
+
+@media (max-width: 650px) {
+
+  .success-page {
+    padding:
+      25px 12px;
+  }
+
+
+  .success-card {
+    padding:
+      30px 18px;
+
+    border-radius: 20px;
+  }
+
+
+  .success-card h1 {
+    font-size: 28px;
+  }
+
+
+  .thank-you-title {
+    font-size: 17px;
+  }
+
+
+  .success-divider span:not(.divider-symbol) {
+    width: 70px;
+  }
+
+
+  .order-info-row {
+    flex-direction: column;
+
+    align-items: flex-start;
+
+    gap: 7px;
+  }
+
+
+  .order-info-row strong {
+    text-align: left;
+  }
+
+
+  .success-buttons {
+    flex-direction: column;
+  }
+
+
+  .success-buttons button {
+    width: 100%;
+  }
+
+}

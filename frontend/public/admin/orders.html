@@ -1,0 +1,1043 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#32160f">
+  <title>RK Choco | Manage Orders</title>
+
+  <style>
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background: #f7f4f1;
+      color: #30211c;
+    }
+
+    /* CHOCOLATE NAVBAR */
+    .topbar {
+      background: linear-gradient(120deg, #32160f, #6d3827);
+      color: white;
+      padding: 16px 25px;
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      gap: 22px;
+      flex-wrap: wrap;
+      border-bottom: 2px solid #c99a45;
+    }
+
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      color: white;
+      text-decoration: none;
+      border: 1px solid #bd947c;
+      border-radius: 8px;
+      padding: 10px 13px;
+      font-size: 13px;
+      font-weight: bold;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    .back-link:hover {
+      background: #ffffff18;
+      color: #f1cc79;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 21px;
+      font-weight: 800;
+      margin-left: auto;
+      flex-shrink: 0;
+    }
+
+    .brand-icon {
+      width: 40px;
+      height: 40px;
+      color: #f1cc79;
+      flex-shrink: 0;
+    }
+
+    .brand small {
+      display: block;
+      font-size: 10px;
+      letter-spacing: 2px;
+      margin-top: 5px;
+      color: #edcfb7;
+    }
+
+    .navbar-heading {
+      text-align: left;
+      flex: 1;
+      min-width: 220px;
+    }
+
+    .navbar-heading .eyebrow {
+      color: #f1cc79;
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 2px;
+      margin: 0 0 5px;
+    }
+
+    .navbar-heading h1 {
+      margin: 0;
+      font-size: 19px;
+      color: white;
+    }
+
+    .navbar-heading p {
+      margin: 5px 0 0;
+      color: #efdbce;
+      font-size: 12px;
+    }
+
+    .container {
+      width: min(1450px, 96%);
+      margin: 28px auto;
+    }
+
+    .eyebrow {
+      color: #946044;
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 2px;
+    }
+
+    .container > h1 { margin: 8px 0; font-size: 30px; }
+
+    .subtitle {
+      color: #76665e;
+      margin-bottom: 24px;
+    }
+
+    .summary {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 15px;
+      flex-wrap: wrap;
+      background: white;
+      padding: 20px;
+      border-radius: 14px;
+      border: 1px solid #eaded6;
+      margin-bottom: 20px;
+    }
+
+    .summary h2 { margin: 0 0 6px; font-size: 21px; }
+
+    .summary p {
+      margin: 0;
+      color: #7a6a62;
+      font-size: 14px;
+    }
+
+    .count {
+      font-size: 25px;
+      font-weight: 800;
+      color: #693b28;
+    }
+
+    .filters {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 9px;
+      margin-bottom: 18px;
+    }
+
+    .filter {
+      border: 1px solid #e1d2c8;
+      background: white;
+      color: #563a2d;
+      border-radius: 22px;
+      padding: 10px 15px;
+      cursor: pointer;
+      font-weight: 700;
+    }
+
+    .filter.active,
+    .filter:hover {
+      color: white;
+      background: #693b28;
+      border-color: #693b28;
+    }
+
+    .table-card {
+      background: white;
+      border: 1px solid #eaded6;
+      border-radius: 14px;
+      overflow: hidden;
+    }
+
+    .table-heading {
+      padding: 17px 20px;
+      border-bottom: 1px solid #eee5df;
+      font-weight: 800;
+    }
+
+    .table-wrap { overflow-x: auto; }
+
+    table {
+      width: 100%;
+      min-width: 1050px;
+      border-collapse: collapse;
+    }
+
+    th, td {
+      padding: 14px 12px;
+      text-align: left;
+      border-bottom: 1px solid #f0e8e3;
+      vertical-align: middle;
+      font-size: 13px;
+    }
+
+    th {
+      background: #fcf9f7;
+      color: #79655a;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: .5px;
+    }
+
+    tr:last-child td { border-bottom: 0; }
+
+    .order-id {
+      font-weight: 800;
+      color: #70412e;
+      overflow-wrap: anywhere;
+      max-width: 190px;
+    }
+
+    .customer-name { font-weight: 700; }
+
+    .muted {
+      color: #81736b;
+      font-size: 12px;
+      margin-top: 4px;
+    }
+
+    .status {
+      display: inline-block;
+      padding: 6px 9px;
+      border-radius: 20px;
+      font-size: 11px;
+      font-weight: 800;
+      white-space: nowrap;
+      background: #f1e8e1;
+      color: #62402e;
+    }
+
+    .status-pending { background: #fff0d5; color: #8c5b00; }
+    .status-confirmed { background: #e4efff; color: #2456a6; }
+    .status-processing { background: #eee5ff; color: #6535a4; }
+    .status-out-for-delivery { background: #dff5f0; color: #146b5a; }
+    .status-completed,
+    .status-delivered { background: #dff4e5; color: #176c36; }
+    .status-cancelled { background: #ffe3e3; color: #a12626; }
+
+    .actions {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      min-width: 260px;
+    }
+
+    button, select { font: inherit; }
+
+    .status-select {
+      max-width: 145px;
+      padding: 8px;
+      border: 1px solid #dfd0c6;
+      border-radius: 7px;
+      background: white;
+      color: #39261e;
+    }
+
+    .btn {
+      border: 0;
+      border-radius: 7px;
+      padding: 9px 11px;
+      cursor: pointer;
+      font-weight: 800;
+      white-space: nowrap;
+    }
+
+    .btn:disabled { opacity: .55; cursor: not-allowed; }
+    .view-btn { background: #f0e5dc; color: #623b28; }
+    .save-btn { background: #693b28; color: white; }
+    .refresh-btn { background: #f0e5dc; color: #623b28; }
+
+    .empty, .loading {
+      padding: 30px 18px;
+      text-align: center;
+      color: #7a6a62;
+    }
+
+    .message {
+      display: none;
+      padding: 13px 16px;
+      margin-bottom: 15px;
+      border-radius: 9px;
+      background: #fff0d5;
+      color: #754d10;
+    }
+
+    .message.error { background: #ffe5e5; color: #a12626; }
+    .message.success { background: #e0f5e6; color: #176c36; }
+
+    .overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 1000;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 18px;
+      background: rgba(26, 14, 10, .65);
+    }
+
+    .overlay.open { display: flex; }
+
+    .modal {
+      background: white;
+      width: min(760px, 100%);
+      max-height: 92vh;
+      overflow-y: auto;
+      border-radius: 15px;
+      box-shadow: 0 20px 60px #0003;
+    }
+
+    .modal-header {
+      padding: 22px;
+      background: linear-gradient(120deg, #32160f, #6d3827);
+      color: white;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 15px;
+    }
+
+    .modal-header h2 { margin: 0 0 7px; }
+    .modal-header p { margin: 0; color: #efdbce; font-size: 13px; }
+
+    .close-btn {
+      background: transparent;
+      color: white;
+      font-size: 27px;
+      padding: 0 5px;
+    }
+
+    .modal-body { padding: 22px; }
+    .detail-section { margin-bottom: 24px; }
+
+    .detail-section h3 {
+      margin: 0 0 13px;
+      font-size: 16px;
+      border-bottom: 1px solid #eee4dd;
+      padding-bottom: 10px;
+    }
+
+    .detail-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .detail-label {
+      font-size: 11px;
+      text-transform: uppercase;
+      color: #87766b;
+      letter-spacing: .7px;
+      margin-bottom: 5px;
+    }
+
+    .detail-value {
+      font-size: 14px;
+      font-weight: 700;
+      overflow-wrap: anywhere;
+      white-space: pre-wrap;
+    }
+
+    .product-list {
+      border: 1px solid #eee4dd;
+      border-radius: 9px;
+      overflow: hidden;
+    }
+
+    .product-row {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto auto;
+      gap: 14px;
+      padding: 13px;
+      border-bottom: 1px solid #eee4dd;
+      align-items: center;
+      font-size: 13px;
+    }
+
+    .product-row:last-child { border-bottom: 0; }
+    .product-row small { display: block; color: #87766b; margin-top: 4px; }
+
+    .total-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 15px;
+      padding: 16px 13px;
+      background: #fcf7f3;
+      font-weight: 800;
+      font-size: 17px;
+    }
+
+    .modal-footer {
+      padding: 0 22px 22px;
+      display: flex;
+      justify-content: flex-end;
+    }
+
+    @media (max-width: 900px) {
+      .topbar { gap: 14px; }
+      .navbar-heading { min-width: 180px; }
+      .brand { margin-left: 0; }
+    }
+
+    @media (max-width: 600px) {
+      .container { width: 94%; margin: 20px auto; }
+      .container > h1 { font-size: 25px; }
+      .detail-grid { grid-template-columns: 1fr; }
+      .modal-body { padding: 16px; }
+      .product-row { grid-template-columns: minmax(0, 1fr) auto; }
+      .product-price { grid-column: 1 / -1; }
+      .topbar { gap: 12px; padding: 13px 16px; }
+      .navbar-heading {
+        width: 100%;
+        flex: 1 1 100%;
+        min-width: 0;
+        text-align: left;
+      }
+      .navbar-heading h1 { font-size: 18px; }
+      .brand { font-size: 19px; }
+      .brand-icon { width: 34px; height: 34px; }
+      .brand small { font-size: 9px; letter-spacing: 1.3px; }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- RK CHOCO ORDER MANAGEMENT NAVBAR -->
+  <header class="topbar">
+    <a class="back-link" href="/admin/dashboard.html">
+      <svg width="18" height="18" viewBox="0 0 24 24"
+           fill="none" stroke="currentColor" stroke-width="2"
+           stroke-linecap="round" stroke-linejoin="round"
+           aria-hidden="true">
+        <path d="m15 18-6-6 6-6"></path>
+        <path d="M9 12h12"></path>
+        <path d="M3 5v14"></path>
+      </svg>
+      Back to Dashboard
+    </a>
+
+    <div class="navbar-heading">
+      <p class="eyebrow">ADMINISTRATION</p>
+      <h1>RK CHOCO ORDER MANAGEMENT</h1>
+      <p>View and manage customer orders.</p>
+    </div>
+
+    <div class="brand">
+      <svg class="brand-icon" viewBox="0 0 24 24"
+           fill="none" stroke="currentColor" stroke-width="1.6"
+           stroke-linecap="round" stroke-linejoin="round"
+           aria-hidden="true">
+        <path d="m12 3 8 4.5v9L12 21l-8-4.5v-9L12 3Z"></path>
+        <path d="m4 7.5 8 4.7 8-4.7"></path>
+        <path d="M12 12.2V21"></path>
+        <path d="m8 5.3 8 4.5"></path>
+      </svg>
+      <div>
+        RK CHOCO
+        <small>PREMIUM CHOCOLATE DISTRIBUTOR</small>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <div class="eyebrow">CUSTOMER ORDERS</div>
+    <h1>All Orders</h1>
+    <p class="subtitle">View customer orders, inspect order details and update delivery status.</p>
+
+    <div id="message" class="message"></div>
+
+    <section class="summary">
+      <div>
+        <h2>All Orders</h2>
+        <p>Customer orders will appear here.</p>
+      </div>
+      <div>
+        <div id="orderCount" class="count">0 Orders</div>
+        <div class="muted">Orders from MongoDB</div>
+      </div>
+      <button class="btn refresh-btn" id="refreshBtn" type="button">↻ Refresh Orders</button>
+    </section>
+
+    <nav class="filters" id="filters">
+      <button class="filter active" data-status="All" type="button">All</button>
+      <button class="filter" data-status="Pending" type="button">Pending</button>
+      <button class="filter" data-status="Confirmed" type="button">Confirmed</button>
+      <button class="filter" data-status="Processing" type="button">Processing</button>
+      <button class="filter" data-status="Out for Delivery" type="button">Out for Delivery</button>
+      <button class="filter" data-status="Delivered" type="button">Delivered</button>
+      <button class="filter" data-status="Cancelled" type="button">Cancelled</button>
+    </nav>
+
+    <section class="table-card">
+      <div class="table-heading">Order Management</div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Order ID</th>
+              <th>Customer</th>
+              <th>Order Date</th>
+              <th>Total Amount</th>
+              <th>Status</th>
+              <th>Payment</th>
+              <th>Items</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="ordersBody">
+            <tr><td colspan="8" class="loading">Loading customer orders...</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+
+  <div class="overlay" id="detailsOverlay" role="dialog" aria-modal="true" aria-labelledby="detailsTitle">
+    <section class="modal">
+      <header class="modal-header">
+        <div>
+          <h2 id="detailsTitle">ORDER DETAILS</h2>
+          <p id="detailsOrderId">Order information</p>
+        </div>
+        <button class="btn close-btn" id="closeDetails" type="button" aria-label="Close">×</button>
+      </header>
+      <div class="modal-body" id="detailsContent"></div>
+      <footer class="modal-footer">
+        <button class="btn save-btn" id="closeDetailsBottom" type="button">Close</button>
+      </footer>
+    </section>
+  </div>
+
+  <script>
+    "use strict";
+
+    const API = "/api/admin";
+    const ordersBody = document.getElementById("ordersBody");
+    const orderCount = document.getElementById("orderCount");
+    const messageBox = document.getElementById("message");
+    const overlay = document.getElementById("detailsOverlay");
+
+    let allOrders = [];
+    let activeFilter = "All";
+
+    function escapeHTML(value) {
+      return String(value ?? "").replace(/[&<>"']/g, char => ({
+        "&": "&amp;",
+        "<": "&lt;",
+        ">": "&gt;",
+        '"': "&quot;",
+        "'": "&#39;"
+      })[char]);
+    }
+
+    function money(value) {
+      const number = Number(value);
+      return "₹" + (Number.isFinite(number) ? number : 0).toLocaleString("en-IN", {
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2
+      });
+    }
+
+    function getOrderId(order) {
+      return String(order._id || order.id || order.orderId || "");
+    }
+
+    function getCustomer(order) {
+      return order.customer || order.customerDetails || order.user || {};
+    }
+
+    function getCustomerName(order) {
+      const customer = getCustomer(order);
+      return order.customerName ||
+        order.name ||
+        customer.name ||
+        customer.fullName ||
+        order.customerEmail ||
+        customer.email ||
+        "Customer";
+    }
+
+    function getShopName(order) {
+      const customer = getCustomer(order);
+      return order.shopName ||
+        order.businessName ||
+        order.customerShopName ||
+        customer.shopName ||
+        customer.businessName ||
+        customer.companyName ||
+        "—";
+    }
+
+    function getPhone(order) {
+      const customer = getCustomer(order);
+      return order.customerPhone ||
+        order.phone ||
+        order.mobile ||
+        order.phoneNumber ||
+        customer.phone ||
+        customer.mobile ||
+        customer.phoneNumber ||
+        customer.mobileNumber ||
+        "—";
+    }
+
+    function formatAddressObject(address) {
+      if (typeof address === "string") return address.trim();
+      if (!address || typeof address !== "object") return "";
+
+      return [
+        address.fullAddress,
+        address.addressLine,
+        address.addressLine1,
+        address.addressLine2,
+        address.street,
+        address.line1,
+        address.line2,
+        address.area,
+        address.landmark,
+        address.village,
+        address.city,
+        address.town,
+        address.district,
+        address.state,
+        address.pincode || address.postalCode || address.zipCode
+      ].filter(Boolean).join(", ");
+    }
+
+    function getAddress(order) {
+      const customer = getCustomer(order);
+      const delivery = order.deliveryDetails || order.delivery || {};
+      const shipping = order.shippingAddress || {};
+      const candidates = [
+        order.customerAddress,
+        order.deliveryAddress,
+        order.address,
+        order.shippingAddress,
+        delivery.address,
+        delivery.deliveryAddress,
+        delivery.fullAddress,
+        shipping,
+        customer.address,
+        customer.deliveryAddress,
+        customer.shippingAddress,
+        customer.fullAddress,
+        customer.shopAddress
+      ];
+
+      for (const candidate of candidates) {
+        const formatted = formatAddressObject(candidate);
+        if (formatted) return formatted;
+      }
+
+      return "Address not saved with this order";
+    }
+
+    function getItems(order) {
+      const items = order.items || order.products || order.orderItems || [];
+      return Array.isArray(items) ? items : [];
+    }
+
+    function getItemName(item) {
+      return item.productName || item.name || item.title || item.brand || "Chocolate Product";
+    }
+
+    function getQuantity(item) {
+      return Number(item.quantity ?? item.qty ?? item.boxes ?? item.totalBoxes ?? 1) || 1;
+    }
+
+    function getItemPrice(item) {
+      const quantity = getQuantity(item);
+      const explicitTotal = item.subtotal ?? item.lineTotal ?? item.totalPrice;
+
+      if (explicitTotal !== undefined && Number.isFinite(Number(explicitTotal))) {
+        return Number(explicitTotal);
+      }
+
+      const unitPrice = Number(item.price ?? item.unitPrice ?? item.sellingPrice ?? 0);
+      return unitPrice * quantity;
+    }
+
+    function getTotal(order) {
+      const amount = order.grandTotal ??
+        order.totalAmount ??
+        order.totalPrice ??
+        order.total ??
+        order.amount;
+
+      if (amount !== undefined && Number.isFinite(Number(amount))) {
+        return Number(amount);
+      }
+
+      return getItems(order).reduce((sum, item) => sum + getItemPrice(item), 0);
+    }
+
+    function getStatus(order) {
+      return String(order.status || "Pending").trim();
+    }
+
+    function formatDate(value) {
+      if (!value) return "—";
+      const date = new Date(value);
+      if (Number.isNaN(date.getTime())) return "—";
+
+      return date.toLocaleString("en-IN", {
+        day: "2-digit",
+        month: "short",
+        year: "numeric",
+        hour: "2-digit",
+        minute: "2-digit"
+      });
+    }
+
+    function statusClass(status) {
+      return "status-" + status.toLowerCase()
+        .replace(/[^a-z0-9]+/g, "-")
+        .replace(/^-|-$/g, "");
+    }
+
+    function showMessage(text, type = "") {
+      messageBox.textContent = text;
+      messageBox.className = "message" + (type ? " " + type : "");
+      messageBox.style.display = "block";
+    }
+
+    function hideMessage() {
+      messageBox.style.display = "none";
+      messageBox.textContent = "";
+    }
+
+    async function apiRequest(path, options = {}) {
+      const response = await fetch(API + path, {
+        credentials: "include",
+        ...options,
+        headers: {
+          "Content-Type": "application/json",
+          ...(options.headers || {})
+        }
+      });
+
+      let data;
+      try {
+        data = await response.json();
+      } catch {
+        data = {};
+      }
+
+      if (response.status === 401 || response.status === 403) {
+        window.location.href = "/admin/";
+        throw new Error("Please log in to the admin dashboard.");
+      }
+
+      if (!response.ok || data.success === false) {
+        throw new Error(data.message || "Request failed. Please try again.");
+      }
+
+      return data;
+    }
+
+    async function checkSession() {
+      const response = await fetch(API + "/session", {
+        credentials: "include"
+      });
+
+      const data = await response.json();
+
+      if (
+        data.authenticated === false ||
+        data.loggedIn === false ||
+        data.isAuthenticated === false
+      ) {
+        window.location.href = "/admin/";
+        return false;
+      }
+
+      return true;
+    }
+
+    async function loadOrders() {
+      hideMessage();
+      ordersBody.innerHTML =
+        '<tr><td colspan="8" class="loading">Loading customer orders...</td></tr>';
+
+      try {
+        const data = await apiRequest("/orders");
+        const orders = Array.isArray(data)
+          ? data
+          : (data.orders || data.data || []);
+
+        allOrders = orders;
+        orderCount.textContent = allOrders.length + (
+          allOrders.length === 1 ? " Order" : " Orders"
+        );
+
+        renderOrders();
+      } catch (error) {
+        ordersBody.innerHTML =
+          '<tr><td colspan="8" class="empty">Unable to load orders. ' +
+          escapeHTML(error.message) + '</td></tr>';
+
+        showMessage(
+          "Orders could not be loaded from MongoDB: " + error.message,
+          "error"
+        );
+      }
+    }
+
+    function renderOrders() {
+      const filtered = activeFilter === "All"
+        ? allOrders
+        : allOrders.filter(order =>
+            getStatus(order).toLowerCase() === activeFilter.toLowerCase()
+          );
+
+      if (!filtered.length) {
+        const text = allOrders.length
+          ? "No orders found for this status."
+          : "No customer orders found in MongoDB yet.";
+
+        ordersBody.innerHTML =
+          '<tr><td colspan="8" class="empty">' + text + '</td></tr>';
+        return;
+      }
+
+      ordersBody.innerHTML = filtered.map(order => {
+        const id = getOrderId(order);
+        const status = getStatus(order);
+        const items = getItems(order);
+        const displayId = order.orderNumber || order.orderCode || id || "—";
+
+        return `
+          <tr>
+            <td>
+              <div class="order-id">${escapeHTML(displayId)}</div>
+              <div class="muted">${items.length} product type(s)</div>
+            </td>
+            <td>
+              <div class="customer-name">${escapeHTML(getCustomerName(order))}</div>
+              <div class="muted">${escapeHTML(getShopName(order))}</div>
+            </td>
+            <td>${escapeHTML(formatDate(order.createdAt || order.orderDate || order.date))}</td>
+            <td><strong>${money(getTotal(order))}</strong></td>
+            <td><span class="status ${statusClass(status)}">${escapeHTML(status)}</span></td>
+            <td>${escapeHTML(order.paymentMethod || order.paymentStatus || order.payment || "—")}</td>
+            <td>${items.reduce((sum, item) => sum + getQuantity(item), 0)}</td>
+            <td>
+              <div class="actions">
+                <button type="button" class="btn view-btn"
+                  data-action="view" data-id="${escapeHTML(id)}"
+                  title="View order details" aria-label="View order details">&#128065; View</button>
+
+                <select class="status-select" data-status-for="${escapeHTML(id)}"
+                  aria-label="Change order status">
+                  ${[
+                    "Pending", "Placed", "Processing", "Confirmed",
+                    "Out for Delivery", "Shipped", "Completed", "Delivered", "Cancelled"
+                  ].map(option => `
+                    <option value="${escapeHTML(option)}"
+                      ${status.toLowerCase() === option.toLowerCase() ? "selected" : ""}>
+                      ${escapeHTML(option)}
+                    </option>
+                  `).join("")}
+                </select>
+
+                <button type="button" class="btn save-btn"
+                  data-action="save" data-id="${escapeHTML(id)}">Save</button>
+              </div>
+            </td>
+          </tr>
+        `;
+      }).join("");
+    }
+
+    function detailField(label, value) {
+      return `
+        <div>
+          <div class="detail-label">${escapeHTML(label)}</div>
+          <div class="detail-value">${escapeHTML(value || "—")}</div>
+        </div>
+      `;
+    }
+
+    function openOrderDetails(id) {
+      const order = allOrders.find(item => getOrderId(item) === id);
+
+      if (!order) {
+        showMessage("This order could not be found. Please refresh the orders.", "error");
+        return;
+      }
+
+      const customer = getCustomer(order);
+      const items = getItems(order);
+      const status = getStatus(order);
+      const displayId = order.orderNumber || order.orderCode || getOrderId(order);
+
+      document.getElementById("detailsOrderId").textContent = "Order #" + displayId;
+
+      const productsHTML = items.length
+        ? items.map(item => `
+            <div class="product-row">
+              <div>
+                <strong>${escapeHTML(getItemName(item))}</strong>
+                <small>${escapeHTML(item.brand || item.category || "Chocolate Product")}</small>
+              </div>
+              <div>Quantity: ${getQuantity(item)}</div>
+              <div class="product-price"><strong>${money(getItemPrice(item))}</strong></div>
+            </div>
+          `).join("")
+        : '<div class="empty">No product details were saved with this order.</div>';
+
+      document.getElementById("detailsContent").innerHTML = `
+        <section class="detail-section">
+          <h3>Customer Information</h3>
+          <div class="detail-grid">
+            ${detailField("Customer", getCustomerName(order))}
+            ${detailField("Shop Name", getShopName(order))}
+            ${detailField("Mobile", getPhone(order))}
+            ${detailField("Email", order.customerEmail || order.email || customer.email || "—")}
+            ${detailField("Order Date", formatDate(order.createdAt || order.orderDate || order.date))}
+            <div>
+              <div class="detail-label">Status</div>
+              <div><span class="status ${statusClass(status)}">${escapeHTML(status)}</span></div>
+            </div>
+          </div>
+        </section>
+
+        <section class="detail-section">
+          <h3>Delivery Address</h3>
+          <div class="detail-value">${escapeHTML(getAddress(order))}</div>
+        </section>
+
+        <section class="detail-section">
+          <h3>Ordered Products</h3>
+          <div class="product-list">
+            ${productsHTML}
+            <div class="total-row">
+              <span>Total Amount</span>
+              <span>${money(getTotal(order))}</span>
+            </div>
+          </div>
+        </section>
+
+        <section class="detail-section">
+          <h3>Payment Information</h3>
+          <div class="detail-grid">
+            ${detailField("Payment Method", order.paymentMethod || order.payment || "—")}
+            ${detailField("Payment Status", order.paymentStatus || "—")}
+          </div>
+        </section>
+      `;
+
+      overlay.classList.add("open");
+    }
+
+    async function saveOrderStatus(id, button) {
+      const select = [...document.querySelectorAll("[data-status-for]")]
+        .find(element => element.dataset.statusFor === id);
+
+      if (!select) return;
+
+      const status = select.value;
+      const originalText = button.textContent;
+      button.disabled = true;
+      button.textContent = "Saving...";
+
+      try {
+        await apiRequest("/orders/" + encodeURIComponent(id) + "/status", {
+          method: "PATCH",
+          body: JSON.stringify({ status })
+        });
+
+        showMessage("Order status updated successfully.", "success");
+        await loadOrders();
+      } catch (error) {
+        showMessage("Could not update order status: " + error.message, "error");
+      } finally {
+        button.disabled = false;
+        button.textContent = originalText;
+      }
+    }
+
+    document.getElementById("filters").addEventListener("click", event => {
+      const button = event.target.closest("[data-status]");
+      if (!button) return;
+
+      activeFilter = button.dataset.status;
+
+      document.querySelectorAll(".filter").forEach(filter => {
+        filter.classList.toggle("active", filter === button);
+      });
+
+      renderOrders();
+    });
+
+    ordersBody.addEventListener("click", event => {
+      const button = event.target.closest("[data-action]");
+      if (!button) return;
+
+      const id = button.dataset.id;
+
+      if (button.dataset.action === "view") {
+        openOrderDetails(id);
+      }
+
+      if (button.dataset.action === "save") {
+        saveOrderStatus(id, button);
+      }
+    });
+
+    function closeDetails() {
+      overlay.classList.remove("open");
+    }
+
+    document.getElementById("closeDetails").addEventListener("click", closeDetails);
+    document.getElementById("closeDetailsBottom").addEventListener("click", closeDetails);
+
+    overlay.addEventListener("click", event => {
+      if (event.target === overlay) closeDetails();
+    });
+
+    document.addEventListener("keydown", event => {
+      if (event.key === "Escape") closeDetails();
+    });
+
+    document.getElementById("refreshBtn").addEventListener("click", loadOrders);
+
+    (async function startOrdersPage() {
+      try {
+        const authenticated = await checkSession();
+        if (authenticated) await loadOrders();
+      } catch (error) {
+        showMessage("Could not verify admin session: " + error.message, "error");
+      }
+    })();
+  </script>
+</body>
+</html>

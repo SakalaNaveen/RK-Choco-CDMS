@@ -1,0 +1,257 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RK Choco | Edit Product</title>
+  <link rel="stylesheet" href="/admin/admin.css">
+  <style>
+    .edit-page {
+      max-width: 900px;
+      margin: 35px auto;
+      padding: 25px;
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 4px 18px rgba(0,0,0,.08);
+    }
+    .edit-navbar {
+      display: flex;
+      align-items: center;
+      gap: 22px;
+      padding: 18px 25px;
+      background: linear-gradient(120deg,#32150e,#713b25);
+      color: white;
+    }
+    .edit-navbar a {
+      color: white;
+      text-decoration: none;
+      font-weight: 600;
+    }
+    .edit-navbar h2 { margin: 0; font-size: 20px; }
+    .edit-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+    }
+    .edit-field { display: flex; flex-direction: column; gap: 7px; }
+    .edit-field.full { grid-column: 1 / -1; }
+    .edit-field label { font-weight: 600; }
+    .edit-field input, .edit-field textarea {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #ddd;
+      border-radius: 7px;
+      font: inherit;
+    }
+    .edit-field textarea { min-height: 100px; resize: vertical; }
+    .edit-actions { display: flex; gap: 12px; margin-top: 22px; }
+    .edit-actions button {
+      padding: 12px 22px;
+      border: 0;
+      border-radius: 7px;
+      cursor: pointer;
+      font-weight: 600;
+    }
+    .save-btn { background: #713b25; color: white; }
+    .cancel-btn { background: #eee; color: #333; }
+    #editMessage { margin-top: 15px; font-weight: 600; }
+    #imagePreview { max-width: 140px; max-height: 120px; object-fit: contain; }
+    @media(max-width:650px) {
+      .edit-grid { grid-template-columns: 1fr; }
+      .edit-field.full { grid-column: auto; }
+      .edit-navbar { flex-wrap: wrap; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="edit-navbar">
+    <a href="/admin/products.html">← Back to Product Management</a>
+    <h2>Edit Product</h2>
+  </nav>
+
+  <main class="edit-page">
+    <h2>Edit Product Details</h2>
+    <p>Update the product information and save your changes.</p>
+
+    <form id="editProductForm">
+      <div class="edit-grid">
+
+        <div class="edit-field">
+          <label for="productName">Product Name</label>
+          <input id="productName" name="name" required>
+        </div>
+
+        <div class="edit-field">
+          <label for="productBrand">Brand</label>
+          <input id="productBrand" name="brand" required>
+        </div>
+
+        <div class="edit-field">
+          <label for="productPrice">Price (₹)</label>
+          <input id="productPrice" name="price" type="number" min="0" step="0.01" required>
+        </div>
+
+        <div class="edit-field">
+          <label for="productStock">Stock</label>
+          <input id="productStock" name="stock" type="number" min="0" required>
+        </div>
+
+        <div class="edit-field">
+          <label for="productUnit">Unit</label>
+          <input id="productUnit" name="unit">
+        </div>
+
+        <div class="edit-field">
+          <label for="productImage">Image URL / Path</label>
+          <input id="productImage" name="image">
+        </div>
+
+        <div class="edit-field full">
+          <label for="productDescription">Description</label>
+          <textarea id="productDescription" name="description"></textarea>
+        </div>
+
+        <div class="edit-field full">
+          <label for="productImageFile">Upload New Image (optional)</label>
+          <input id="productImageFile" name="imageFile" type="file" accept="image/*">
+          <img id="imagePreview" alt="Product image preview" hidden>
+        </div>
+
+      </div>
+
+      <div class="edit-actions">
+        <button class="save-btn" id="saveProductBtn" type="submit">Save Changes</button>
+        <button class="cancel-btn" type="button" onclick="location.href='/admin/products.html'">Cancel</button>
+      </div>
+
+      <div id="editMessage" role="status"></div>
+    </form>
+  </main>
+
+  <script>
+    const API = "/api/admin";
+    const params = new URLSearchParams(window.location.search);
+    const productId = params.get("id");
+
+    const form = document.getElementById("editProductForm");
+    const message = document.getElementById("editMessage");
+    const saveButton = document.getElementById("saveProductBtn");
+    const imageInput = document.getElementById("productImageFile");
+    const imagePreview = document.getElementById("imagePreview");
+
+    function showMessage(text, isError = false) {
+      message.textContent = text;
+      message.style.color = isError ? "#c62828" : "#237a36";
+    }
+
+    function getImageUrl(image) {
+      if (!image) return "";
+      if (/^https?:\/\//i.test(image)) return image;
+      return image.startsWith("/") ? image : "/" + image;
+    }
+
+    async function loadProduct() {
+      if (!productId) {
+        showMessage("Product ID missing. Please go back and click Edit again.", true);
+        saveButton.disabled = true;
+        return;
+      }
+
+      try {
+        const response = await fetch(API + "/products", {
+          credentials: "include",
+          cache: "no-store"
+        });
+
+        const result = await response.json();
+
+        if (!response.ok || result.success === false) {
+          throw new Error(result.message || "Unable to load products.");
+        }
+
+        const products = Array.isArray(result)
+          ? result
+          : (result.products || result.data || []);
+
+        const product = products.find(item =>
+          String(item._id || item.id) === String(productId)
+        );
+
+        if (!product) {
+          throw new Error("Product not found.");
+        }
+
+        document.getElementById("productName").value = product.name || "";
+        document.getElementById("productBrand").value = product.brand || "";
+        document.getElementById("productPrice").value = product.price ?? "";
+        document.getElementById("productStock").value = product.stock ?? "";
+        document.getElementById("productUnit").value = product.unit || "";
+        document.getElementById("productImage").value = product.image || product.imageUrl || "";
+        document.getElementById("productDescription").value = product.description || "";
+
+        const image = getImageUrl(product.image || product.imageUrl);
+        if (image) {
+          imagePreview.src = image;
+          imagePreview.hidden = false;
+        }
+      } catch (error) {
+        showMessage(error.message || "Unable to load product.", true);
+      }
+    }
+
+    imageInput.addEventListener("change", () => {
+      const file = imageInput.files && imageInput.files[0];
+      if (!file) return;
+      imagePreview.src = URL.createObjectURL(file);
+      imagePreview.hidden = false;
+    });
+
+    form.addEventListener("submit", async event => {
+      event.preventDefault();
+
+      if (!productId) return;
+
+      const data = new FormData();
+      data.append("name", document.getElementById("productName").value.trim());
+      data.append("brand", document.getElementById("productBrand").value.trim());
+      data.append("price", document.getElementById("productPrice").value);
+      data.append("stock", document.getElementById("productStock").value);
+      data.append("unit", document.getElementById("productUnit").value.trim());
+      data.append("image", document.getElementById("productImage").value.trim());
+      data.append("description", document.getElementById("productDescription").value.trim());
+
+      const imageFile = imageInput.files && imageInput.files[0];
+      if (imageFile) data.append("imageFile", imageFile);
+
+      saveButton.disabled = true;
+      showMessage("Saving product...");
+
+      try {
+        const response = await fetch(API + "/products/" + encodeURIComponent(productId), {
+          method: "PUT",
+          credentials: "include",
+          body: data
+        });
+
+        const result = await response.json();
+
+        if (!response.ok || result.success === false) {
+          throw new Error(result.message || "Unable to update product.");
+        }
+
+        showMessage("Product updated successfully!");
+        setTimeout(() => {
+          window.location.href = "/admin/products.html";
+        }, 900);
+      } catch (error) {
+        showMessage(error.message || "Product update failed.", true);
+        saveButton.disabled = false;
+      }
+    });
+
+    loadProduct();
+  </script>
+</body>
+</html>

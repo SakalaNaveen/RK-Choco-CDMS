@@ -1,0 +1,31 @@
+:root{
+
+    /* Chocolate Colors */
+
+    --primary-color:#4E2F1F;
+    --secondary-color:#6F4E37;
+    --accent-color:#D4AF37;
+    --light-color:#FFF8F0;
+    --dark-color:#2B1B12;
+
+    /* Background */
+
+    --background-color:#F8F4EF;
+
+    /* Text */
+
+    --text-color:#333333;
+    --white:#FFFFFF;
+
+    /* Border */
+
+    --border-radius:12px;
+
+    /* Shadow */
+
+    --box-shadow:0 8px 20px rgba(0,0,0,0.15);
+
+    /* Transition */
+
+    --transition:0.3s ease;
+}

@@ -1,0 +1,199 @@
+.order-details-page {
+  min-height: 100vh;
+
+  padding: 50px 20px;
+
+  box-sizing: border-box;
+
+  background:
+    linear-gradient(
+      135deg,
+      #fff8e8,
+      #f8dfad,
+      #fff3d2
+    );
+
+  display: flex;
+
+  justify-content: center;
+
+  align-items: flex-start;
+}
+
+
+.order-form-card {
+  width: 70%;
+
+  max-width: 850px;
+
+  background: white;
+
+  border: 1px solid #e8cea1;
+
+  border-radius: 28px;
+
+  padding: 45px;
+
+  box-sizing: border-box;
+
+  box-shadow:
+    0 20px 45px
+    rgba(100, 65, 20, 0.12);
+}
+
+
+.order-label {
+  color: #1499ca;
+
+  font-size: 18px;
+
+  font-weight: 800;
+
+  letter-spacing: 5px;
+}
+
+
+.order-form-card h1 {
+  margin: 12px 0 8px;
+
+  color: #71321e;
+
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
+
+  font-size: 44px;
+
+  font-weight: 500;
+}
+
+
+.order-description {
+  color: #597594;
+
+  font-size: 18px;
+
+  margin-bottom: 25px;
+}
+
+
+.order-total-box {
+  padding: 20px 24px;
+
+  background: #fffaf1;
+
+  border: 1px solid #ead4ad;
+
+  border-radius: 16px;
+
+  display: flex;
+
+  justify-content: space-between;
+
+  align-items: center;
+
+  margin-bottom: 25px;
+}
+
+
+.order-total-box span {
+  color: #536c87;
+
+  font-size: 18px;
+
+  font-weight: 700;
+}
+
+
+.order-total-box strong {
+  color: #ca6a00;
+
+  font-size: 30px;
+}
+
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+
+.form-group label {
+  display: flex;
+
+  align-items: center;
+
+  gap: 8px;
+
+  margin-bottom: 8px;
+
+  color: #174f82;
+
+  font-weight: 700;
+}
+
+
+.form-group input,
+.form-group textarea {
+  width: 100%;
+
+  box-sizing: border-box;
+
+  padding: 14px 16px;
+
+  border: 1px solid #d9c49e;
+
+  border-radius: 12px;
+
+  font-size: 16px;
+
+  outline: none;
+
+  font-family: inherit;
+}
+
+
+.form-group input:focus,
+.form-group textarea:focus {
+  border-color: #159dce;
+}
+
+
+.confirm-order-button {
+  width: 100%;
+
+  padding: 17px;
+
+  border: none;
+
+  border-radius: 13px;
+
+  background: #149dce;
+
+  color: white;
+
+  font-size: 18px;
+
+  font-weight: 800;
+
+  cursor: pointer;
+
+  display: flex;
+
+  justify-content: center;
+
+  align-items: center;
+
+  gap: 10px;
+}
+
+
+@media (max-width: 700px) {
+
+  .order-form-card {
+    width: 95%;
+
+    padding: 25px;
+  }
+
+}

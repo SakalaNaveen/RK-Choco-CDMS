@@ -1,0 +1,155 @@
+.cdms-logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    user-select: none;
+}
+
+/* Main circular emblem */
+
+.logo-emblem {
+    width: 58px;
+    height: 58px;
+
+    border-radius: 50%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background:
+        radial-gradient(
+            circle at 35% 30%,
+            #7b4325,
+            #3b170b 70%
+        );
+
+    border: 3px solid #d4af37;
+
+    box-shadow:
+        0 0 0 2px #6f421d,
+        0 4px 12px rgba(0, 0, 0, 0.4);
+}
+
+/* Inner ring */
+
+.logo-emblem-ring {
+    width: 47px;
+    height: 47px;
+
+    border-radius: 50%;
+
+    border: 1px solid #f6d76b;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    position: relative;
+
+    overflow: hidden;
+}
+
+/* Truck + shop */
+
+.logo-icon-row {
+    display: flex;
+    gap: 7px;
+
+    color: #ffd54f;
+
+    font-size: 10px;
+
+    margin-bottom: 1px;
+}
+
+/* Chocolate/product icon */
+
+.logo-chocolate {
+    color: #e6a62e;
+
+    font-size: 9px;
+
+    position: absolute;
+
+    top: 17px;
+}
+
+/* CDMS text inside circle */
+
+.logo-text {
+    position: absolute;
+
+    bottom: 4px;
+
+    font-size: 14px;
+
+    font-weight: 900;
+
+    letter-spacing: 1px;
+
+    color: #ffffff;
+
+    text-shadow:
+        1px 1px 2px #000;
+}
+
+/* Company name */
+
+.logo-information {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.logo-information h1 {
+    margin: 0;
+
+    color: #d4af37;
+
+    font-size: 30px;
+
+    line-height: 1;
+
+    font-weight: 900;
+
+    letter-spacing: 1px;
+}
+
+/* Company description */
+
+.logo-information p {
+    margin: 5px 0 0;
+
+    color: #ffffff;
+
+    font-size: 12px;
+
+    line-height: 1.2;
+
+    white-space: nowrap;
+}
+
+/* Mobile */
+
+@media (max-width: 600px) {
+
+    .logo-emblem {
+        width: 48px;
+        height: 48px;
+    }
+
+    .logo-emblem-ring {
+        width: 38px;
+        height: 38px;
+    }
+
+    .logo-information h1 {
+        font-size: 24px;
+    }
+
+    .logo-information p {
+        display: none;
+    }
+}

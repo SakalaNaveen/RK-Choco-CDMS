@@ -1,0 +1,585 @@
+/* ==========================================
+   CHOCOLATE DISPLAY
+========================================== */
+
+.chocolate-display {
+  width: 100%;
+
+  height: 570px;
+
+  position: relative;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+}
+
+
+/* ==========================================
+   CHOCOLATE SPLASH
+========================================== */
+
+.chocolate-splash {
+  position: absolute;
+
+  width: 550px;
+  height: 160px;
+
+  right: 20px;
+  top: 275px;
+
+  background: #6b2b0e;
+
+  border-radius: 50%;
+
+  transform:
+    rotate(-4deg);
+
+  opacity: 0.95;
+
+  z-index: 1;
+}
+
+
+/* ==========================================
+   PACKETS AREA
+========================================== */
+
+.chocolate-packets {
+  position: absolute;
+
+  width: 570px;
+  height: 390px;
+
+  right: 20px;
+  top: 75px;
+
+  z-index: 5;
+}
+
+
+/* ==========================================
+   GENERAL PACKET
+========================================== */
+
+.choco-packet {
+  position: absolute;
+
+  width: 120px;
+  height: 245px;
+
+  border-radius: 8px;
+
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+
+  justify-content: center;
+
+  text-align: center;
+
+  box-shadow:
+    0 12px 25px rgba(0,0,0,0.22);
+
+  border: 2px solid rgba(255,255,255,0.2);
+}
+
+
+/* ==========================================
+   KITKAT PACKETS
+========================================== */
+
+.kitkat {
+  background:
+    linear-gradient(
+      145deg,
+      #d40000,
+      #a90000
+    );
+
+  color: white;
+
+  border-color: #e5b24b;
+
+  z-index: 8;
+}
+
+
+.kitkat-logo {
+  width: 92px;
+
+  padding: 8px 4px;
+
+  margin-bottom: 16px;
+
+  border-radius: 50%;
+
+  background: white;
+
+  color: #c90000;
+
+  font-family: Georgia, serif;
+
+  font-size: 22px;
+
+  font-weight: bold;
+
+  transform:
+    rotate(-4deg);
+}
+
+
+.kitkat-line {
+  font-size: 10px;
+
+  font-weight: bold;
+
+  margin-bottom: 20px;
+}
+
+
+.kitkat-chocolate {
+  font-size: 18px;
+
+  letter-spacing: 3px;
+}
+
+
+/* KITKAT POSITIONS */
+
+.kk-1 {
+  left: 195px;
+  top: 35px;
+
+  transform:
+    rotate(-8deg);
+
+  z-index: 7;
+}
+
+
+.kk-2 {
+  left: 285px;
+  top: 28px;
+
+  transform:
+    rotate(4deg);
+
+  z-index: 9;
+}
+
+
+.kk-3 {
+  left: 370px;
+  top: 58px;
+
+  transform:
+    rotate(10deg);
+
+  z-index: 6;
+}
+
+
+.kk-4 {
+  left: 105px;
+  top: 95px;
+
+  transform:
+    rotate(-15deg);
+
+  z-index: 5;
+
+  opacity: 0.95;
+}
+
+
+/* ==========================================
+   DAIRY MILK
+========================================== */
+
+.dairy {
+  left: 265px;
+  top: 12px;
+
+  height: 270px;
+
+  background:
+    linear-gradient(
+      145deg,
+      #57209b,
+      #351064
+    );
+
+  color: white;
+
+  z-index: 10;
+
+  transform:
+    rotate(-3deg);
+}
+
+
+.dairy-small {
+  font-size: 11px;
+
+  margin: 8px;
+}
+
+
+.dairy-big {
+  font-family: Georgia, serif;
+
+  font-size: 25px;
+
+  font-weight: bold;
+
+  margin: 2px;
+}
+
+
+/* ==========================================
+   OREO
+========================================== */
+
+.oreo {
+  left: 80px;
+  top: 70px;
+
+  height: 245px;
+
+  background:
+    linear-gradient(
+      145deg,
+      #0871ca,
+      #07549a
+    );
+
+  color: white;
+
+  transform:
+    rotate(-15deg);
+
+  z-index: 4;
+}
+
+
+.oreo-logo {
+  font-size: 28px;
+
+  font-weight: bold;
+
+  margin-bottom: 20px;
+}
+
+
+.oreo-original {
+  font-family: Georgia, serif;
+
+  font-size: 20px;
+
+  font-weight: bold;
+}
+
+
+.oreo-small {
+  font-size: 10px;
+
+  margin-top: 15px;
+}
+
+
+/* ==========================================
+   5 STAR
+========================================== */
+
+.star {
+  right: -10px;
+  top: 100px;
+
+  height: 235px;
+
+  background:
+    linear-gradient(
+      145deg,
+      #ffc400,
+      #e59d00
+    );
+
+  color: #3b1d0b;
+
+  transform:
+    rotate(13deg);
+
+  z-index: 4;
+}
+
+
+.star-small {
+  font-size: 11px;
+
+  margin: 12px;
+}
+
+
+.star-big {
+  font-family: Georgia, serif;
+
+  font-size: 19px;
+
+  font-weight: bold;
+
+  margin: 20px 0;
+}
+
+
+/* ==========================================
+   RK CHOCO BOX
+========================================== */
+
+.rk-choco-box {
+  position: absolute;
+
+  width: 560px;
+
+  height: 170px;
+
+  right: 5px;
+
+  bottom: 65px;
+
+  z-index: 20;
+
+  background:
+    linear-gradient(
+      145deg,
+      #0d3e83,
+      #07336f
+    );
+
+  border: 4px solid #d8a932;
+
+  border-radius: 12px;
+
+  box-shadow:
+    0 18px 30px
+    rgba(0,0,0,0.25);
+
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+
+  justify-content: center;
+}
+
+
+.box-star {
+  color: #f1c43f;
+
+  font-size: 18px;
+
+  margin-bottom: 5px;
+}
+
+
+.box-title {
+  color: #f3c84d;
+
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
+
+  font-size: 42px;
+
+  font-weight: bold;
+
+  letter-spacing: 1px;
+}
+
+
+.box-subtitle {
+  color: white;
+
+  font-family: Georgia, serif;
+
+  font-size: 21px;
+
+  letter-spacing: 5px;
+
+  margin-top: 5px;
+}
+
+
+.box-bottom {
+  position: absolute;
+
+  bottom: -32px;
+
+  width: 72%;
+
+  height: 45px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  background: #092e65;
+
+  border: 2px solid #d8a932;
+
+  color: #f0bd36;
+
+  font-size: 10px;
+
+  letter-spacing: 2px;
+}
+
+
+/* ==========================================
+   FLOATING CHOCOLATES
+========================================== */
+
+.floating-chocolate {
+  position: absolute;
+
+  font-size: 28px;
+
+  z-index: 25;
+
+  animation:
+    chocolateFloat 4s ease-in-out infinite;
+}
+
+
+.fc-1 {
+  top: 40px;
+  right: 105px;
+}
+
+
+.fc-2 {
+  top: 115px;
+  right: 250px;
+
+  animation-delay: 1s;
+}
+
+
+.fc-3 {
+  top: 175px;
+  left: 90px;
+
+  animation-delay: 1.5s;
+}
+
+
+.fc-4 {
+  bottom: 80px;
+  right: 170px;
+
+  animation-delay: 2s;
+}
+
+
+.fc-5 {
+  bottom: 110px;
+  left: 150px;
+
+  animation-delay: 0.7s;
+}
+
+
+@keyframes chocolateFloat {
+
+  0% {
+    transform:
+      translateY(0)
+      rotate(0deg);
+  }
+
+  50% {
+    transform:
+      translateY(-12px)
+      rotate(8deg);
+  }
+
+  100% {
+    transform:
+      translateY(0)
+      rotate(0deg);
+  }
+}
+
+
+/* ==========================================
+   CHOCOLATE PIECES
+========================================== */
+
+.chocolate-piece {
+  position: absolute;
+
+  font-size: 25px;
+
+  z-index: 30;
+}
+
+
+.cp-1 {
+  right: 50px;
+  bottom: 50px;
+}
+
+
+.cp-2 {
+  right: 360px;
+  bottom: 25px;
+}
+
+
+.cp-3 {
+  left: 50px;
+  bottom: 80px;
+}
+
+
+/* ==========================================
+   RESPONSIVE
+========================================== */
+
+@media (max-width: 1100px) {
+
+  .chocolate-display {
+    transform:
+      scale(0.85);
+  }
+}
+
+
+@media (max-width: 850px) {
+
+  .chocolate-display {
+    transform:
+      scale(0.72);
+
+    margin-left: -40px;
+  }
+}
+
+
+@media (max-width: 600px) {
+
+  .chocolate-display {
+    transform:
+      scale(0.55);
+
+    margin-left: -100px;
+  }
+}

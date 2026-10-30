@@ -1,0 +1,815 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>RK Choco | Product Management</title>
+  <link rel="stylesheet" href="/admin/admin.css" />
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    .product-page-navbar {
+      display: flex;
+      align-items: center;
+      gap: 22px;
+      padding: 18px 25px;
+      background: linear-gradient(135deg, #35140d, #74331f);
+      color: #fff;
+      box-shadow: 0 3px 12px rgba(0,0,0,.15);
+      flex-wrap: wrap;
+    }
+
+    .product-page-navbar a {
+      color: #fff;
+      text-decoration: none;
+      font-weight: 800;
+      padding: 10px 15px;
+      border: 1px solid rgba(255,255,255,.35);
+      border-radius: 8px;
+    }
+
+    .product-page-navbar a:hover {
+      background: rgba(255,255,255,.12);
+    }
+
+    .product-page-navbar h2 {
+      margin: 0;
+      font-size: 21px;
+    }
+
+    .product-page-content {
+      padding: 25px;
+    }
+
+    .product-page-heading {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 15px;
+      flex-wrap: wrap;
+      margin-bottom: 22px;
+    }
+
+    .product-page-heading h1 {
+      margin: 0;
+      color: #35140d;
+    }
+
+    .product-page-heading p {
+      margin: 7px 0 0;
+      color: #806456;
+    }
+
+    /* ATTRACTIVE ADD PRODUCT BUTTON */
+
+    #addProductBtn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 9px;
+      min-height: 48px;
+      padding: 13px 23px;
+      border: 0;
+      border-radius: 10px;
+      background: linear-gradient(135deg, #35140d, #74331f, #9b5433);
+      color: #fff;
+      font-size: 14px;
+      font-weight: 800;
+      letter-spacing: .3px;
+      cursor: pointer;
+      box-shadow: 0 6px 17px rgba(84,37,21,.25);
+      transition: .25s ease;
+    }
+
+    #addProductBtn:hover {
+      background: linear-gradient(135deg, #71351e, #a65b36);
+      transform: translateY(-3px);
+      box-shadow: 0 10px 22px rgba(84,37,21,.32);
+    }
+
+    #addProductBtn:active {
+      transform: translateY(0);
+    }
+
+    /* STOCK FILTER */
+
+    .stock-filter-area {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin: 0 0 17px;
+      padding: 14px 16px;
+      background: #fffaf6;
+      border: 1px solid #ead9ce;
+      border-radius: 11px;
+    }
+
+    .stock-filter-area label {
+      color: #492317;
+      font-size: 14px;
+      font-weight: 800;
+    }
+
+    #stockFilter {
+      min-width: 190px;
+      min-height: 42px;
+      padding: 9px 35px 9px 12px;
+      border: 1px solid #d9bdab;
+      border-radius: 8px;
+      background: #fff;
+      color: #542515;
+      font-size: 14px;
+      font-weight: 700;
+      cursor: pointer;
+      outline: none;
+    }
+
+    #stockFilter:focus {
+      border-color: #8a492d;
+      box-shadow: 0 0 0 3px rgba(138,73,45,.12);
+    }
+
+    .product-table-wrapper {
+      width: 100%;
+      overflow-x: auto;
+      border-radius: 10px;
+    }
+
+    /* TABLE ALIGNMENT */
+
+    .product-table-wrapper table {
+      width: 100%;
+      min-width: 850px;
+      table-layout: fixed;
+      border-collapse: collapse;
+    }
+
+    .product-table-wrapper th,
+    .product-table-wrapper td {
+      padding: 13px 12px;
+      text-align: left;
+      vertical-align: middle;
+      overflow: hidden;
+    }
+
+    .product-table-wrapper th:nth-child(1),
+    .product-table-wrapper td:nth-child(1) {
+      width: 105px;
+    }
+
+    .product-table-wrapper th:nth-child(2),
+    .product-table-wrapper td:nth-child(2) {
+      width: 22%;
+    }
+
+    .product-table-wrapper th:nth-child(3),
+    .product-table-wrapper td:nth-child(3) {
+      width: 17%;
+    }
+
+    .product-table-wrapper th:nth-child(4),
+    .product-table-wrapper td:nth-child(4) {
+      width: 13%;
+    }
+
+    .product-table-wrapper th:nth-child(5),
+    .product-table-wrapper td:nth-child(5) {
+      width: 13%;
+    }
+
+    .product-table-wrapper th:nth-child(6),
+    .product-table-wrapper td:nth-child(6) {
+      width: 190px;
+    }
+
+    /* IMAGE ONLY IN IMAGE COLUMN */
+
+    #productsTableBody td:nth-child(1) {
+      text-align: center;
+    }
+
+    #productsTableBody td:nth-child(1) img {
+      display: block;
+      width: 65px;
+      height: 65px;
+      max-width: 100%;
+      margin: 0 auto;
+      object-fit: contain;
+      border-radius: 8px;
+    }
+
+    /* PRODUCT NAME IN ITS OWN COLUMN */
+
+    #productsTableBody td:nth-child(2) {
+      font-weight: 700;
+      overflow-wrap: anywhere;
+    }
+
+    /* STOCK NUMBER */
+
+    #productsTableBody td:nth-child(5) {
+      font-weight: 800;
+      white-space: nowrap;
+    }
+
+    /* ACTION BUTTONS INSIDE ACTION COLUMN */
+
+    #productsTableBody td:nth-child(6) {
+      white-space: nowrap;
+      text-align: center;
+      overflow: visible;
+    }
+
+    #productsTableBody td:nth-child(6) button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      margin: 3px;
+      white-space: nowrap;
+    }
+
+    /* PREMIUM PRODUCT MODAL */
+
+    #productModal.product-modal {
+      display: none;
+      position: fixed;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      min-height: 100vh;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      box-sizing: border-box;
+      background: rgba(25, 10, 5, .72);
+      backdrop-filter: blur(5px);
+      -webkit-backdrop-filter: blur(5px);
+      z-index: 99999;
+      overflow-y: auto;
+    }
+
+    #productModal.product-modal.show,
+    #productModal.product-modal.open {
+      display: flex !important;
+    }
+
+    #productModal .modal-content {
+      position: relative;
+      display: block;
+      width: 100%;
+      max-width: 650px;
+      max-height: calc(100vh - 40px);
+      overflow-y: auto;
+      margin: auto;
+      padding: 25px;
+      box-sizing: border-box;
+      background: #fffaf6;
+      border: 1px solid rgba(255,255,255,.8);
+      border-radius: 18px;
+      box-shadow: 0 25px 80px rgba(0,0,0,.38);
+      animation: productModalAppear .25s ease-out;
+    }
+
+    @keyframes productModalAppear {
+      from {
+        opacity: 0;
+        transform: translateY(18px) scale(.98);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+
+    #productModal .modal-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 15px;
+      margin: -25px -25px 25px;
+      padding: 22px 25px;
+      background: linear-gradient(135deg, #35140d, #74331f, #9b5433);
+      color: #fff;
+      border-radius: 17px 17px 0 0;
+    }
+
+    #productModal .modal-header h2 {
+      margin: 0;
+      color: #fff;
+      font-size: 22px;
+      font-weight: 800;
+      letter-spacing: .2px;
+    }
+
+    #productModal #closeProductModal {
+      width: 36px;
+      height: 36px;
+      min-width: 36px;
+      border: 1px solid rgba(255,255,255,.55);
+      border-radius: 50%;
+      background: rgba(255,255,255,.12);
+      color: #fff;
+      font-size: 25px;
+      line-height: 1;
+      cursor: pointer;
+      transition: .2s ease;
+    }
+
+    #productModal #closeProductModal:hover {
+      background: #fff;
+      color: #542515;
+      transform: rotate(90deg);
+    }
+
+    #productModal #productForm {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px 20px;
+    }
+
+    #productModal .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      min-width: 0;
+      margin: 0;
+    }
+
+    #productModal .form-group label {
+      color: #492317;
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: .25px;
+    }
+
+    #productModal .form-group input,
+    #productModal .form-group textarea {
+      width: 100%;
+      max-width: 100%;
+      min-height: 44px;
+      padding: 12px 13px;
+      box-sizing: border-box;
+      border: 1px solid #e7d5c8;
+      border-radius: 9px;
+      background: #fff;
+      color: #382019;
+      font-size: 14px;
+      outline: none;
+      transition: border-color .2s, box-shadow .2s, background .2s;
+    }
+
+    #productModal .form-group textarea {
+      min-height: 85px;
+      resize: vertical;
+    }
+
+    #productModal .form-group input::placeholder,
+    #productModal .form-group textarea::placeholder {
+      color: #aa9589;
+    }
+
+    #productModal .form-group input:focus,
+    #productModal .form-group textarea:focus {
+      border-color: #8a492d;
+      background: #fff;
+      box-shadow: 0 0 0 3px rgba(138,73,45,.12);
+    }
+
+    #productModal .form-group input[type="file"] {
+      padding: 9px;
+      background: #fff;
+      cursor: pointer;
+    }
+
+    #productModal .form-group input[type="file"]::file-selector-button {
+      padding: 8px 12px;
+      margin-right: 10px;
+      border: 0;
+      border-radius: 6px;
+      background: #f0dfd3;
+      color: #542515;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    #productModal .form-group:nth-of-type(6),
+    #productModal .form-group:nth-of-type(7),
+    #productModal .modal-actions {
+      grid-column: 1 / -1;
+    }
+
+    #productModal .form-group:nth-of-type(7) {
+      padding: 15px;
+      border: 1px dashed #c99c7f;
+      border-radius: 12px;
+      background: #fff6ee;
+    }
+
+    #productModal #productImagePreview {
+      max-width: 130px;
+      max-height: 130px;
+      object-fit: contain;
+      display: none;
+      margin-top: 10px;
+      padding: 8px;
+      border: 1px solid #ead9ce;
+      border-radius: 10px;
+      background: #fff;
+    }
+
+    #productModal #productImageStatus {
+      margin: 5px 0;
+      color: #75513e;
+      font-size: 12px;
+    }
+
+    #productModal #clearProductImage {
+      width: fit-content;
+      padding: 8px 13px;
+      border: 1px solid #c99c7f;
+      border-radius: 7px;
+      background: #fff;
+      color: #713b25;
+      font-size: 12px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    #productModal #clearProductImage:hover {
+      background: #f4e4d9;
+    }
+
+    #productModal .modal-actions {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      gap: 12px;
+      margin: 5px -25px -25px;
+      padding: 17px 25px;
+      border-top: 1px solid #efdfd4;
+      background: #fff5ed;
+      border-radius: 0 0 17px 17px;
+    }
+
+    #productModal .modal-actions button {
+      min-height: 42px;
+      padding: 11px 21px;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 800;
+      cursor: pointer;
+      transition: .2s ease;
+    }
+
+    #productModal #cancelProductBtn {
+      border: 1px solid #d9c5b8;
+      background: #fff;
+      color: #684333;
+    }
+
+    #productModal #cancelProductBtn:hover {
+      background: #f1e6de;
+    }
+
+    #productModal #saveProductBtn {
+      border: 0;
+      background: linear-gradient(135deg, #542515, #8b472a);
+      color: #fff;
+      box-shadow: 0 5px 13px rgba(84,37,21,.22);
+    }
+
+    #productModal #saveProductBtn:hover {
+      background: linear-gradient(135deg, #71351e, #a65b36);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 17px rgba(84,37,21,.28);
+    }
+
+    @media(max-width:600px) {
+      #productModal.product-modal {
+        padding: 12px;
+      }
+
+      #productModal .modal-content {
+        padding: 18px;
+        max-height: calc(100vh - 24px);
+      }
+
+      #productModal .modal-header {
+        margin: -18px -18px 20px;
+        padding: 18px;
+      }
+
+      #productModal .modal-header h2 {
+        font-size: 19px;
+      }
+
+      #productModal #productForm {
+        grid-template-columns: 1fr;
+      }
+
+      #productModal .form-group,
+      #productModal .modal-actions {
+        grid-column: 1;
+      }
+
+      #productModal .modal-actions {
+        margin: 5px -18px -18px;
+        padding: 15px 18px;
+        flex-wrap: wrap;
+      }
+
+      .product-page-content {
+        padding: 15px;
+      }
+
+      .stock-filter-area {
+        justify-content: space-between;
+      }
+
+      #stockFilter {
+        flex: 1;
+        min-width: 150px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <nav class="product-page-navbar">
+    <a href="/admin/dashboard.html">← Back to Dashboard</a>
+    <h2>RK Choco | Product Management</h2>
+  </nav>
+
+  <main class="product-page-content">
+
+    <div class="product-page-heading">
+      <div>
+        <h1>Product Management</h1>
+        <p>Manage RK Choco products</p>
+      </div>
+
+      <button type="button" id="addProductBtn">
+        <span>＋</span> Add New Product
+      </button>
+    </div>
+
+    <!-- STOCK FILTER -->
+
+    <div class="stock-filter-area">
+      <label for="stockFilter">Filter Products:</label>
+
+      <select id="stockFilter">
+        <option value="all">All Stocks</option>
+        <option value="available">Available Stocks</option>
+        <option value="out">Out of Stocks</option>
+      </select>
+    </div>
+
+    <div class="product-table-wrapper">
+      <table>
+        <thead>
+          <tr>
+            <th>Image</th>
+            <th>Product Name</th>
+            <th>Brand</th>
+            <th>Price</th>
+            <th>Stock</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+
+        <tbody id="productsTableBody"></tbody>
+      </table>
+    </div>
+
+  </main>
+
+  <!-- ADD / EDIT PRODUCT MODAL -->
+
+  <div id="productModal" class="product-modal">
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <h2 id="productModalTitle">Add New Product</h2>
+        <button type="button" id="closeProductModal">×</button>
+      </div>
+
+      <form id="productForm" enctype="multipart/form-data">
+
+        <input type="hidden" id="productId" />
+
+        <div class="form-group">
+          <label for="productName">Product Name</label>
+          <input
+            type="text"
+            id="productName"
+            required
+            placeholder="Enter product name"
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="productBrand">Brand</label>
+          <input
+            type="text"
+            id="productBrand"
+            required
+            placeholder="Enter brand name"
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="productPrice">Price</label>
+          <input
+            type="number"
+            id="productPrice"
+            min="0"
+            step="0.01"
+            required
+            placeholder="Enter price"
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="productStock">Stock</label>
+          <input
+            type="number"
+            id="productStock"
+            min="0"
+            required
+            placeholder="Enter stock"
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="productUnit">Unit</label>
+          <input
+            type="text"
+            id="productUnit"
+            placeholder="Example: 1 Box = 10 Pieces"
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="productDescription">Description</label>
+          <textarea
+            id="productDescription"
+            rows="3"
+            placeholder="Enter product description"
+          ></textarea>
+        </div>
+
+        <div class="form-group">
+          <label for="productImageFile">Product Image</label>
+          <input
+            type="file"
+            id="productImageFile"
+            accept="image/*"
+          />
+
+          <input type="hidden" id="productImage" />
+          <input type="hidden" id="removeProductImage" value="false" />
+
+          <img
+            id="productImagePreview"
+            class="product-image-preview"
+            alt="Product preview"
+          />
+
+          <p id="productImageStatus"></p>
+
+          <button type="button" id="clearProductImage">
+            Clear Image
+          </button>
+        </div>
+
+        <div class="modal-actions">
+          <button type="button" id="cancelProductBtn">Cancel</button>
+          <button type="submit" id="saveProductBtn">Save Product</button>
+        </div>
+
+      </form>
+    </div>
+  </div>
+
+  <!-- IMAGE PREVIEW -->
+
+  <script>
+    const productImageFile = document.getElementById("productImageFile");
+    const productImagePreview = document.getElementById("productImagePreview");
+    const productImageStatus = document.getElementById("productImageStatus");
+    const productImage = document.getElementById("productImage");
+    const removeProductImage = document.getElementById("removeProductImage");
+    const clearProductImage = document.getElementById("clearProductImage");
+
+    let productPreviewUrl = null;
+
+    productImageFile.addEventListener("change", function () {
+      const file = this.files && this.files[0];
+
+      if (!file) return;
+
+      if (!file.type.startsWith("image/")) {
+        alert("Please select a valid image file.");
+        this.value = "";
+        return;
+      }
+
+      if (productPreviewUrl) {
+        URL.revokeObjectURL(productPreviewUrl);
+      }
+
+      productPreviewUrl = URL.createObjectURL(file);
+      productImagePreview.src = productPreviewUrl;
+      productImagePreview.style.display = "block";
+      productImageStatus.textContent = "New image selected: " + file.name;
+      removeProductImage.value = "false";
+    });
+
+    clearProductImage.addEventListener("click", function () {
+      productImageFile.value = "";
+      productImage.value = "";
+      removeProductImage.value = "true";
+
+      if (productPreviewUrl) {
+        URL.revokeObjectURL(productPreviewUrl);
+        productPreviewUrl = null;
+      }
+
+      productImagePreview.removeAttribute("src");
+      productImagePreview.style.display = "none";
+      productImageStatus.textContent = "Image cleared.";
+    });
+  </script>
+
+  <!-- EXISTING ADMIN JAVASCRIPT -->
+
+  <script src="/admin/admin.js"></script>
+
+  <!-- STOCK FILTER FUNCTIONALITY -->
+
+  <script>
+    (function () {
+      const stockFilter = document.getElementById("stockFilter");
+      const productsTableBody = document.getElementById("productsTableBody");
+
+      if (!stockFilter || !productsTableBody) return;
+
+      function applyStockFilter() {
+        const selectedFilter = stockFilter.value;
+        const rows = productsTableBody.querySelectorAll("tr");
+
+        rows.forEach(function (row) {
+          const cells = row.querySelectorAll("td");
+
+          // Ignore loading, error and empty-state rows.
+          if (cells.length < 6) {
+            row.style.display = "";
+            return;
+          }
+
+          // Stock is the fifth column.
+          const stockText = cells[4].textContent.trim();
+          const stockMatch = stockText.replace(/,/g, "").match(/-?\d+(\.\d+)?/);
+
+          if (!stockMatch) {
+            row.style.display = "";
+            return;
+          }
+
+          const stockValue = Number(stockMatch[0]);
+
+          if (selectedFilter === "available") {
+            row.style.display = stockValue > 0 ? "" : "none";
+          } else if (selectedFilter === "out") {
+            row.style.display = stockValue <= 0 ? "" : "none";
+          } else {
+            row.style.display = "";
+          }
+        });
+      }
+
+      stockFilter.addEventListener("change", applyStockFilter);
+
+      // Reapply filter whenever products are loaded or updated.
+      const observer = new MutationObserver(function () {
+        applyStockFilter();
+      });
+
+      observer.observe(productsTableBody, {
+        childList: true,
+        subtree: true,
+        characterData: true
+      });
+    })();
+  </script>
+
+</body>
+</html>

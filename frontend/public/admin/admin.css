@@ -1,0 +1,1005 @@
+
+:root {
+  --brown: #51291d;
+  --brown-dark: #2b120d;
+  --brown-light: #743d29;
+  --cream: #fffaf5;
+  --background: #f7f3ef;
+  --text: #30221b;
+  --muted: #806f65;
+  --border: #eaded5;
+  --green: #237a43;
+  --red: #b42318;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  background: var(--background);
+  color: var(--text);
+}
+
+a {
+  color: var(--brown-light);
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+
+.rk-admin {
+  min-height: 100vh;
+}
+
+/* Common navbar */
+
+.rk-top {
+  min-height: 76px;
+  padding: 14px 30px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 18px;
+  color: white;
+  background: linear-gradient(110deg, #2b120d, #66321f);
+  box-shadow: 0 5px 20px #28130e25;
+}
+
+.rk-brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: white;
+  text-decoration: none;
+  font-size: 21px;
+  font-weight: 800;
+}
+
+.rk-mark {
+  width: 42px;
+  height: 42px;
+  display: grid;
+  place-items: center;
+  border-radius: 12px;
+  background: #f3d7bd;
+  color: #542719;
+}
+
+.rk-top nav {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  gap: 7px;
+}
+
+.rk-top nav a,
+.rk-logout {
+  padding: 10px 12px;
+  border: 0;
+  border-radius: 8px;
+  background: transparent;
+  color: white;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.rk-top nav a:hover,
+.rk-top nav a.active,
+.rk-logout:hover {
+  background: #ffffff20;
+}
+
+/* Page layout */
+
+.rk-main {
+  width: 100%;
+  max-width: 1400px;
+  margin: auto;
+  padding: 30px;
+}
+
+.rk-pagehead {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 18px;
+  margin-bottom: 24px;
+}
+
+.rk-pagehead h1 {
+  margin: 5px 0 8px;
+  color: var(--brown);
+  font-size: clamp(27px, 3vw, 36px);
+}
+
+.rk-eyebrow {
+  color: #a15c39;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+}
+
+.rk-muted {
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+.rk-head-actions,
+.rk-toolbar,
+.rk-form-actions {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+/* Buttons */
+
+.rk-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  padding: 11px 16px;
+  border: 0;
+  border-radius: 9px;
+  background: var(--brown-light);
+  color: white;
+  text-decoration: none;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.rk-btn:hover {
+  filter: brightness(1.1);
+}
+
+.rk-btn:disabled {
+  opacity: 0.6;
+  cursor: wait;
+}
+
+.rk-btn-light {
+  background: white;
+  color: var(--brown);
+  border: 1px solid var(--border);
+}
+
+.rk-btn-danger {
+  background: var(--red);
+}
+
+.rk-btn-small {
+  padding: 7px 10px;
+  border-radius: 7px;
+  font-size: 12px;
+}
+
+/* Dashboard statistics */
+
+.rk-stats,
+.rk-report-stats {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 16px;
+  margin-bottom: 22px;
+}
+
+.rk-stat {
+  padding: 21px;
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 15px;
+  box-shadow: 0 8px 24px #4220120b;
+}
+
+.stat-label {
+  color: var(--muted);
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.stat-value {
+  margin-top: 10px;
+  color: var(--brown);
+  font-size: 29px;
+  font-weight: 800;
+  overflow-wrap: anywhere;
+}
+
+.stat-note {
+  margin-top: 6px;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+/* Panels and tables */
+
+.rk-panel,
+.rk-welcome,
+.rk-tile {
+  margin-bottom: 22px;
+  padding: 22px;
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: 15px;
+  box-shadow: 0 8px 24px #4220120b;
+}
+
+.rk-panelhead {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.rk-panelhead h2 {
+  margin: 0;
+  color: var(--brown);
+  font-size: 20px;
+}
+
+.rk-count {
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.rk-table-wrap {
+  width: 100%;
+  overflow-x: auto;
+  border: 1px solid var(--border);
+  border-radius: 11px;
+}
+
+.rk-table {
+  width: 100%;
+  min-width: 680px;
+  border-collapse: collapse;
+  background: white;
+}
+
+.rk-table th,
+.rk-table td {
+  padding: 13px 14px;
+  border-bottom: 1px solid #f0e7e0;
+  text-align: left;
+  vertical-align: middle;
+  font-size: 13px;
+  overflow-wrap: anywhere;
+}
+
+.rk-table th {
+  background: #fbf4ee;
+  color: #67402e;
+  font-size: 12px;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.rk-table tr:last-child td {
+  border-bottom: 0;
+}
+
+.rk-empty {
+  padding: 28px !important;
+  color: var(--muted);
+  text-align: center !important;
+}
+
+/* Inputs */
+
+.rk-search,
+.rk-select,
+.rk-field input,
+.rk-field select,
+.rk-field textarea {
+  width: 100%;
+  padding: 11px 12px;
+  border: 1px solid #ddcbbf;
+  border-radius: 9px;
+  background: white;
+  color: var(--text);
+  outline: none;
+}
+
+.rk-search {
+  max-width: 340px;
+}
+
+.rk-select {
+  max-width: 220px;
+}
+
+.rk-field {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  color: #684431;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.rk-field input:focus,
+.rk-field select:focus,
+.rk-field textarea:focus,
+.rk-search:focus,
+.rk-select:focus {
+  border-color: #a76846;
+  box-shadow: 0 0 0 3px #a7684618;
+}
+
+.rk-fields {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 15px;
+}
+
+.rk-full {
+  grid-column: 1 / -1;
+}
+
+.rk-form-actions {
+  justify-content: flex-end;
+  margin-top: 20px;
+}
+
+/* Product modal */
+
+.rk-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 20;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  overflow-y: auto;
+  padding: 18px;
+  background: #1f100dcc;
+}
+
+.rk-modal.open {
+  display: flex;
+}
+
+.rk-modal-card {
+  width: min(620px, 100%);
+  max-height: 92vh;
+  overflow-y: auto;
+  padding: 24px;
+  border-radius: 17px;
+  background: var(--cream);
+  box-shadow: 0 20px 70px #0005;
+}
+
+.rk-modal-card h2 {
+  margin-top: 0;
+  color: var(--brown);
+}
+
+/* Messages */
+
+.rk-message {
+  display: none;
+  margin-bottom: 16px;
+  padding: 12px 14px;
+  border-radius: 9px;
+  background: #fff0e8;
+  color: var(--red);
+  overflow-wrap: anywhere;
+}
+
+.rk-message.show {
+  display: block;
+}
+
+.rk-message.success {
+  background: #eaf7ee;
+  color: var(--green);
+}
+
+/* Status labels */
+
+.rk-status {
+  display: inline-block;
+  padding: 5px 9px;
+  border-radius: 999px;
+  background: #f4e7dc;
+  color: #74402a;
+  font-size: 11px;
+  font-weight: 800;
+  white-space: nowrap;
+}
+
+.rk-status.pending {
+  background: #fff0cf;
+  color: #865c00;
+}
+
+.rk-status.completed,
+.rk-status.delivered {
+  background: #e3f5e8;
+  color: #237a43;
+}
+
+.rk-status.cancelled {
+  background: #fde8e7;
+  color: #b42318;
+}
+
+.rk-status.processing,
+.rk-status.confirmed {
+  background: #e6efff;
+  color: #2858a5;
+}
+
+/* Dashboard tiles */
+
+.rk-welcome {
+  background: linear-gradient(120deg, #fffaf5, #f1dfd0);
+}
+
+.rk-welcome h2 {
+  margin: 0 0 9px;
+  color: var(--brown);
+  font-size: 27px;
+}
+
+.rk-welcome p {
+  margin: 0;
+  color: #765847;
+  line-height: 1.6;
+}
+
+.rk-tiles {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 15px;
+  margin-top: 22px;
+}
+
+.rk-tile {
+  margin: 0;
+  color: var(--text);
+  text-decoration: none;
+  transition: transform 0.15s;
+}
+
+.rk-tile:hover {
+  transform: translateY(-2px);
+}
+
+.rk-tile-icon {
+  font-size: 26px;
+}
+
+.rk-tile h3 {
+  margin: 12px 0 7px;
+  color: var(--brown);
+}
+
+.rk-report-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.rk-footer {
+  padding: 18px;
+  color: #8d7c71;
+  text-align: center;
+  font-size: 12px;
+}
+
+/* Login screen */
+
+.rk-login-page {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+  background: linear-gradient(135deg, #2b120d, #6b3020, #b87545);
+}
+
+.rk-login-card {
+  width: min(440px, 100%);
+  padding: 34px;
+  border-radius: 20px;
+  background: var(--cream);
+  box-shadow: 0 20px 60px #0004;
+}
+
+.rk-login-card h1 {
+  margin: 12px 0 8px;
+  color: var(--brown);
+  text-align: center;
+}
+
+.rk-login-card .subtitle {
+  margin-bottom: 24px;
+  color: var(--muted);
+  text-align: center;
+}
+
+.rk-login-mark {
+  width: 58px;
+  height: 58px;
+  display: grid;
+  place-items: center;
+  margin: auto;
+  border-radius: 17px;
+  background: #ead0ba;
+  color: var(--brown);
+  font-size: 22px;
+  font-weight: 900;
+}
+
+.rk-login-card .rk-field {
+  margin: 16px 0;
+}
+
+.rk-password-wrap {
+  position: relative;
+  display: flex;
+}
+
+.rk-password-wrap input {
+  padding-right: 52px;
+}
+
+.rk-eye {
+  position: absolute;
+  top: 50%;
+  right: 5px;
+  width: 40px;
+  height: 38px;
+  transform: translateY(-50%);
+  border: 0;
+  background: transparent;
+  color: var(--brown);
+  font-size: 18px;
+  cursor: pointer;
+}
+
+.rk-login-card .rk-btn {
+  width: 100%;
+  margin-top: 10px;
+}
+
+.rk-login-links {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 18px;
+  font-size: 13px;
+}
+
+.rk-login-links a {
+  color: var(--brown-light);
+}
+
+/* Responsive layout */
+
+@media (max-width: 950px) {
+  .rk-stats,
+  .rk-report-stats {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .rk-tiles {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .rk-top {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .rk-top nav {
+    justify-content: flex-start;
+  }
+}
+
+@media (max-width: 620px) {
+  .rk-main {
+    padding: 20px 14px;
+  }
+
+  .rk-stats,
+  .rk-report-stats,
+  .rk-tiles,
+  .rk-report-grid,
+  .rk-fields {
+    grid-template-columns: 1fr;
+  }
+
+  .rk-full {
+    grid-column: auto;
+  }
+
+  .rk-panel {
+    padding: 15px;
+  }
+
+  .rk-login-card {
+    padding: 25px;
+  }
+
+  .rk-top {
+    padding: 14px;
+  }
+
+  .rk-top nav a,
+  .rk-logout {
+    padding: 8px;
+    font-size: 12px;
+  }
+}
+
+/* Compact dashboard overview cards */
+.rk-stats {
+  grid-template-columns: repeat(auto-fit, minmax(145px, 1fr));
+  gap: 10px;
+  margin: 14px 0;
+}
+
+.rk-stat {
+  padding: 13px 15px;
+  border-radius: 12px;
+}
+
+.rk-stat span {
+  font-size: 11px;
+  margin-bottom: 7px;
+}
+
+.rk-stat strong {
+  font-size: clamp(18px, 1.7vw, 23px);
+}
+
+.rk-stat small {
+  font-size: 10px;
+  margin-top: 5px;
+}
+
+.rk-welcome {
+  padding: 22px 26px;
+  margin-bottom: 15px;
+}
+
+.rk-welcome h2 {
+  font-size: clamp(22px, 2.4vw, 29px);
+}
+
+.rk-tiles {
+  gap: 12px;
+}
+
+.rk-tile {
+  padding: 18px;
+  border-radius: 14px;
+}
+
+.rk-tile h3 {
+  margin: 12px 0 6px;
+  font-size: 17px;
+}
+
+.rk-tile p {
+  min-height: 0;
+}
+
+/* =====================================================
+   RK CHOCO ADMIN DASHBOARD
+   Compact Business Overview Cards
+===================================================== */
+
+/* Dashboard content spacing */
+.rk-admin,
+.admin-dashboard,
+.dashboard-container,
+.dashboard-content {
+  box-sizing: border-box;
+}
+
+.rk-stats,
+.stats-grid,
+.stats-container,
+.dashboard-stats,
+.overview-cards,
+.business-overview,
+.dashboard-cards {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px;
+  margin: 14px 0 20px;
+}
+
+/* Compact overview cards */
+.rk-stat,
+.stat-card,
+.stats-card,
+.dashboard-stat,
+.overview-card,
+.business-card,
+.dashboard-card {
+  box-sizing: border-box;
+  min-width: 0;
+  min-height: 100px;
+  padding: 14px 15px !important;
+  border-radius: 10px;
+}
+
+/* Smaller headings and numbers */
+.rk-stat h2,
+.rk-stat h3,
+.stat-card h2,
+.stat-card h3,
+.stats-card h2,
+.stats-card h3,
+.dashboard-stat h2,
+.dashboard-stat h3,
+.overview-card h2,
+.overview-card h3 {
+  margin: 0 0 7px;
+  font-size: 13px;
+  line-height: 1.4;
+}
+
+.rk-stat strong,
+.rk-stat .value,
+.stat-card strong,
+.stat-card .value,
+.stats-card strong,
+.stats-card .value,
+.dashboard-stat strong,
+.dashboard-stat .value,
+.overview-card strong,
+.overview-card .value {
+  font-size: 23px;
+  line-height: 1.3;
+}
+
+/* Compact dashboard tiles */
+.rk-tiles {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.rk-tile {
+  min-width: 0;
+  padding: 14px !important;
+  border-radius: 10px;
+}
+
+/* Tablet */
+@media (max-width: 900px) {
+  .rk-stats,
+  .stats-grid,
+  .stats-container,
+  .dashboard-stats,
+  .overview-cards,
+  .business-overview,
+  .dashboard-cards,
+  .rk-tiles {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+/* Mobile */
+@media (max-width: 480px) {
+  .rk-stats,
+  .stats-grid,
+  .stats-container,
+  .dashboard-stats,
+  .overview-cards,
+  .business-overview,
+  .dashboard-cards,
+  .rk-tiles {
+    gap: 8px;
+  }
+
+  .rk-stat,
+  .stat-card,
+  .stats-card,
+  .dashboard-stat,
+  .overview-card,
+  .business-card,
+  .dashboard-card,
+  .rk-tile {
+    min-height: 85px;
+    padding: 10px !important;
+  }
+
+  .rk-stat strong,
+  .rk-stat .value,
+  .stat-card strong,
+  .stat-card .value,
+  .stats-card strong,
+  .stats-card .value,
+  .dashboard-stat strong,
+  .dashboard-stat .value,
+  .overview-card strong,
+  .overview-card .value {
+    font-size: 20px;
+  }
+}
+
+/* Compact Business Overview cards */
+.rk-stats {
+  grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+  gap: 10px !important;
+  margin: 12px 0 18px !important;
+}
+
+.rk-stat {
+  min-height: 88px !important;
+  padding: 12px !important;
+  border-radius: 10px !important;
+}
+
+.rk-stat span {
+  margin-bottom: 6px !important;
+  font-size: 11px !important;
+}
+
+.rk-stat strong {
+  font-size: 21px !important;
+}
+
+.rk-stat small {
+  margin-top: 4px !important;
+  font-size: 10px !important;
+}
+
+@media (max-width: 700px) {
+  .rk-stats {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+}
+/* ==========================================
+   RK CHOCO — COMMON ADMIN NAVBAR
+   Navbar design only
+========================================== */
+
+.rk-admin-navbar {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 14px 24px;
+  background: linear-gradient(135deg, #32140e, #572719, #32140e);
+  color: #fff;
+  border-bottom: 2px solid #c99a45;
+  box-sizing: border-box;
+}
+
+.rk-admin-navbar .rk-dashboard-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: #fff;
+  text-decoration: none;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.rk-admin-navbar .rk-dashboard-link:hover {
+  color: #f1cc79;
+}
+
+.rk-admin-navbar .rk-admin-brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+}
+
+.rk-admin-navbar .rk-admin-icon {
+  width: 38px;
+  height: 38px;
+  flex-shrink: 0;
+  color: #f1cc79;
+}
+
+.rk-admin-navbar .rk-admin-label {
+  margin: 0;
+  color: #f1cc79;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 2px;
+}
+
+.rk-admin-navbar .rk-admin-title {
+  margin: 3px 0 0;
+  color: #fff;
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.rk-admin-navbar .rk-admin-description {
+  margin: 4px 0 0;
+  color: #eadbd2;
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+@media (max-width: 600px) {
+  .rk-admin-navbar {
+    align-items: flex-start;
+    padding: 12px 14px;
+    gap: 10px;
+  }
+
+  .rk-admin-navbar .rk-admin-title {
+    font-size: 16px;
+  }
+
+  .rk-admin-navbar .rk-admin-description {
+    font-size: 11px;
+  }
+
+  .rk-admin-navbar .rk-admin-icon {
+    width: 30px;
+    height: 30px;
+  }
+}
+
+/* ==========================================
+   DASHBOARD — BUSINESS OVERVIEW CARDS ONLY
+========================================== */
+
+.rk-stats {
+  grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+  gap: 10px !important;
+}
+
+.rk-stats .rk-stat {
+  min-width: 0 !important;
+  min-height: 78px !important;
+  padding: 10px 12px !important;
+  border-radius: 10px !important;
+}
+
+.rk-stats .rk-stat span {
+  font-size: 11px !important;
+  margin-bottom: 5px !important;
+}
+
+.rk-stats .rk-stat strong {
+  font-size: 20px !important;
+  line-height: 1.2 !important;
+}
+
+.rk-stats .rk-stat small {
+  font-size: 10px !important;
+  margin-top: 3px !important;
+}
+
+@media (max-width: 700px) {
+  .rk-stats {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+}

@@ -1,0 +1,518 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#4b241b">
+
+  <title>RK Choco | Admin Login</title>
+
+  <link rel="stylesheet" href="/admin/admin.css">
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: Arial, Helvetica, sans-serif;
+      background:
+        radial-gradient(circle at top left, #f5dfc6 0, transparent 38%),
+        linear-gradient(135deg, #fff9f1, #f0e0d0);
+      color: #352019;
+    }
+
+    .login-page {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+
+    .login-card {
+      width: 100%;
+      max-width: 440px;
+      padding: 38px;
+      background: #fff;
+      border: 1px solid #ead9cc;
+      border-radius: 22px;
+      box-shadow: 0 18px 55px rgba(75, 36, 27, 0.13);
+    }
+
+    .brand-mark {
+      width: 72px;
+      height: 72px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 18px;
+      border-radius: 20px;
+      color: #fff;
+      background: linear-gradient(135deg, #6b3829, #3e1c16);
+      font-size: 27px;
+      font-weight: 800;
+      letter-spacing: -2px;
+      box-shadow: 0 8px 20px rgba(75, 36, 27, 0.2);
+    }
+
+    .brand-title {
+      margin: 0;
+      text-align: center;
+      color: #4b241b;
+      font-size: 30px;
+      font-weight: 800;
+    }
+
+    .brand-subtitle {
+      margin: 9px 0 30px;
+      text-align: center;
+      color: #897267;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 2px;
+    }
+
+    .login-heading {
+      margin: 0 0 8px;
+      font-size: 23px;
+      color: #352019;
+    }
+
+    .login-description {
+      margin: 0 0 25px;
+      color: #817168;
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+    .form-group {
+      margin-bottom: 19px;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 8px;
+      color: #493127;
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .form-group input {
+      width: 100%;
+      min-height: 48px;
+      padding: 12px 14px;
+      border: 1px solid #dfcfc3;
+      border-radius: 10px;
+      outline: none;
+      background: #fffdfa;
+      color: #352019;
+      font: inherit;
+      font-size: 14px;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+
+    .form-group input:focus {
+      border-color: #74402e;
+      box-shadow: 0 0 0 3px rgba(116, 64, 46, 0.1);
+    }
+
+    .password-wrap {
+      position: relative;
+    }
+
+    .password-wrap input {
+      padding-right: 52px;
+    }
+
+    .toggle-password {
+      position: absolute;
+      top: 50%;
+      right: 7px;
+      transform: translateY(-50%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 38px;
+      height: 38px;
+      border: 0;
+      border-radius: 8px;
+      background: transparent;
+      color: #704735;
+      cursor: pointer;
+    }
+
+    .toggle-password:hover {
+      background: #f6eee8;
+    }
+
+    .toggle-password svg {
+      width: 21px;
+      height: 21px;
+    }
+
+    .forgot-row {
+      display: flex;
+      justify-content: flex-end;
+      margin-top: -7px;
+      margin-bottom: 22px;
+    }
+
+    .forgot-link {
+      color: #75402d;
+      font-size: 13px;
+      font-weight: 700;
+      text-decoration: none;
+    }
+
+    .forgot-link:hover {
+      text-decoration: underline;
+    }
+
+    .login-button {
+      width: 100%;
+      min-height: 50px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 9px;
+      border: 0;
+      border-radius: 10px;
+      background: linear-gradient(135deg, #75402d, #482219);
+      color: #fff;
+      font-size: 15px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: opacity 0.2s, transform 0.2s;
+    }
+
+    .login-button:hover {
+      transform: translateY(-1px);
+    }
+
+    .login-button:disabled {
+      opacity: 0.65;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .message {
+      display: none;
+      margin: 0 0 17px;
+      padding: 12px 13px;
+      border-radius: 9px;
+      font-size: 13px;
+      line-height: 1.5;
+      overflow-wrap: anywhere;
+    }
+
+    .message.error {
+      display: block;
+      color: #a32626;
+      background: #fff0ee;
+      border: 1px solid #f2c7c1;
+    }
+
+    .message.success {
+      display: block;
+      color: #216c3b;
+      background: #edf9f0;
+      border: 1px solid #c6e9cf;
+    }
+
+    .login-footer {
+      margin: 25px 0 0;
+      text-align: center;
+      color: #958276;
+      font-size: 12px;
+      line-height: 1.6;
+    }
+
+    .secure-note {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 7px;
+      margin-top: 18px;
+      color: #817168;
+      font-size: 12px;
+    }
+
+    .secure-note svg {
+      width: 15px;
+      height: 15px;
+      color: #54835a;
+    }
+
+    @media (max-width: 480px) {
+      .login-page {
+        padding: 16px;
+      }
+
+      .login-card {
+        padding: 27px 22px;
+        border-radius: 17px;
+      }
+
+      .brand-title {
+        font-size: 27px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <main class="login-page">
+    <section class="login-card" aria-labelledby="loginHeading">
+
+      <div class="brand-mark" aria-label="RK Choco">RK</div>
+
+      <h1 class="brand-title">RK Choco</h1>
+
+      <p class="brand-subtitle">PREMIUM CHOCOLATE DISTRIBUTOR</p>
+
+      <h2 class="login-heading" id="loginHeading">Admin Login</h2>
+
+      <p class="login-description">
+        Sign in to manage products, customers, orders and reports.
+      </p>
+
+      <div
+        id="loginMessage"
+        class="message"
+        role="alert"
+        aria-live="polite"
+      ></div>
+
+      <form id="adminLoginForm" novalidate>
+
+        <div class="form-group">
+          <label for="adminEmail">Admin Email</label>
+
+          <input
+            type="email"
+            id="adminEmail"
+            name="email"
+            placeholder="Enter your admin email"
+            autocomplete="username"
+            required
+          >
+        </div>
+
+        <div class="form-group">
+          <label for="adminPassword">Password</label>
+
+          <div class="password-wrap">
+            <input
+              type="password"
+              id="adminPassword"
+              name="password"
+              placeholder="Enter your password"
+              autocomplete="current-password"
+              required
+            >
+
+            <button
+              type="button"
+              class="toggle-password"
+              id="togglePassword"
+              aria-label="Show password"
+              aria-pressed="false"
+              title="Show password"
+            >
+              <svg
+                id="eyeIcon"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.8"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+              >
+                <path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12Z"></path>
+                <circle cx="12" cy="12" r="3"></circle>
+              </svg>
+            </button>
+          </div>
+        </div>
+
+        <div class="forgot-row">
+          <a class="forgot-link" href="/admin/forgot-password.html">
+            Forgot Password?
+          </a>
+        </div>
+
+        <button
+          type="submit"
+          class="login-button"
+          id="loginButton"
+        >
+          <span id="loginButtonText">Login to Dashboard</span>
+        </button>
+
+      </form>
+
+      <div class="secure-note">
+        <svg
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          aria-hidden="true"
+        >
+          <rect x="4" y="10" width="16" height="11" rx="2"></rect>
+          <path d="M8 10V7a4 4 0 0 1 8 0v3"></path>
+        </svg>
+
+        Secure administrator access
+      </div>
+
+      <p class="login-footer">
+        RK Choco<br>
+        Chocolate Distribution Management System
+      </p>
+
+    </section>
+  </main>
+
+  <script>
+    (() => {
+      "use strict";
+
+      const form = document.getElementById("adminLoginForm");
+      const emailInput = document.getElementById("adminEmail");
+      const passwordInput = document.getElementById("adminPassword");
+      const toggleButton = document.getElementById("togglePassword");
+      const eyeIcon = document.getElementById("eyeIcon");
+      const message = document.getElementById("loginMessage");
+      const loginButton = document.getElementById("loginButton");
+      const loginButtonText = document.getElementById("loginButtonText");
+
+      function showMessage(text, type = "error") {
+        message.textContent = text;
+        message.className = `message ${type}`;
+      }
+
+      function clearMessage() {
+        message.textContent = "";
+        message.className = "message";
+      }
+
+      function setPasswordVisibility(show) {
+        passwordInput.type = show ? "text" : "password";
+
+        toggleButton.setAttribute(
+          "aria-label",
+          show ? "Hide password" : "Show password"
+        );
+
+        toggleButton.setAttribute("aria-pressed", String(show));
+        toggleButton.title = show ? "Hide password" : "Show password";
+
+        eyeIcon.innerHTML = show
+          ? `
+            <path d="M3 3l18 18"></path>
+            <path d="M10.6 10.6a2 2 0 0 0 2.8 2.8"></path>
+            <path d="M9.9 5.2A10.8 10.8 0 0 1 12 5c6.4 0 10 7 10 7a16 16 0 0 1-3.1 3.8"></path>
+            <path d="M6.2 6.2C3.5 8 2 12 2 12s3.6 7 10 7a10.6 10.6 0 0 0 4-.8"></path>
+          `
+          : `
+            <path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12Z"></path>
+            <circle cx="12" cy="12" r="3"></circle>
+          `;
+      }
+
+      toggleButton.addEventListener("click", () => {
+        setPasswordVisibility(passwordInput.type === "password");
+      });
+
+      form.addEventListener("submit", async (event) => {
+        event.preventDefault();
+        clearMessage();
+
+        const email = emailInput.value.trim();
+        const password = passwordInput.value;
+
+        if (!email || !password) {
+          showMessage("Please enter both admin email and password.");
+          return;
+        }
+
+        if (!emailInput.checkValidity()) {
+          showMessage("Please enter a valid email address.");
+          emailInput.focus();
+          return;
+        }
+
+        loginButton.disabled = true;
+        loginButtonText.textContent = "Signing in...";
+
+        try {
+          const response = await fetch("/api/admin/login", {
+            method: "POST",
+            credentials: "same-origin",
+            headers: {
+              "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ email, password })
+          });
+
+          let result;
+
+          try {
+            result = await response.json();
+          } catch {
+            throw new Error(
+              "The server returned an invalid response. Please check that the backend is running."
+            );
+          }
+
+          if (!response.ok || result.success !== true) {
+            throw new Error(result.message || "Login failed. Please try again.");
+          }
+
+          showMessage("Login successful. Opening dashboard...", "success");
+
+          window.location.replace("/admin/dashboard.html");
+        } catch (error) {
+          showMessage(
+            error.message ||
+            "Unable to connect to the server. Please check that the backend is running."
+          );
+
+          loginButton.disabled = false;
+          loginButtonText.textContent = "Login to Dashboard";
+        }
+      });
+
+      async function checkExistingSession() {
+        try {
+          const response = await fetch("/api/admin/session", {
+            method: "GET",
+            credentials: "same-origin",
+            cache: "no-store"
+          });
+
+          if (!response.ok) return;
+
+          const result = await response.json();
+
+          if (result.authenticated === true) {
+            window.location.replace("/admin/dashboard.html");
+          }
+        } catch (error) {
+          console.warn("Unable to check admin session:", error);
+        }
+      }
+
+      checkExistingSession();
+    })();
+  </script>
+</body>
+</html>

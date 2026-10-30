@@ -1,0 +1,1016 @@
+/* =====================================================
+   RK CHOCO REGISTER PAGE
+   Premium Chocolate Theme
+   ===================================================== */
+
+* {
+  box-sizing: border-box;
+}
+
+.register-page {
+  min-height: 100vh;
+  width: 100%;
+  padding: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background:
+    radial-gradient(circle at 10% 20%, rgba(255, 179, 71, 0.12), transparent 25%),
+    radial-gradient(circle at 90% 80%, rgba(255, 116, 24, 0.10), transparent 30%),
+    linear-gradient(135deg, #170805 0%, #2a0d05 45%, #130503 100%);
+
+  position: relative;
+  overflow: hidden;
+}
+
+
+/* =====================================================
+   BACKGROUND EFFECTS
+   ===================================================== */
+
+.register-page::before {
+  content: "";
+  position: absolute;
+  width: 500px;
+  height: 500px;
+  left: -220px;
+  bottom: -260px;
+
+  background: radial-gradient(
+    circle,
+    rgba(146, 54, 14, 0.55),
+    transparent 70%
+  );
+
+  border-radius: 50%;
+  filter: blur(20px);
+}
+
+.register-page::after {
+  content: "";
+  position: absolute;
+  width: 450px;
+  height: 450px;
+  right: -200px;
+  top: -220px;
+
+  background: radial-gradient(
+    circle,
+    rgba(255, 164, 52, 0.20),
+    transparent 70%
+  );
+
+  border-radius: 50%;
+  filter: blur(20px);
+}
+
+
+/* =====================================================
+   MAIN CONTAINER
+   ===================================================== */
+
+.register-container {
+  width: 100%;
+  max-width: 1450px;
+  min-height: 850px;
+
+  display: grid;
+  grid-template-columns: 1fr 520px;
+
+  position: relative;
+  z-index: 2;
+
+  border: 1px solid rgba(255, 190, 80, 0.20);
+  border-radius: 28px;
+
+  overflow: hidden;
+
+  background: rgba(25, 8, 3, 0.35);
+
+  box-shadow:
+    0 30px 100px rgba(0, 0, 0, 0.55),
+    inset 0 0 80px rgba(255, 152, 48, 0.03);
+}
+
+
+/* =====================================================
+   LEFT SIDE
+   ===================================================== */
+
+.register-showcase {
+  min-height: 850px;
+
+  padding: 55px 55px 45px;
+
+  position: relative;
+
+  display: flex;
+  align-items: center;
+
+  overflow: hidden;
+
+  background:
+    radial-gradient(
+      circle at 20% 30%,
+      rgba(112, 43, 12, 0.35),
+      transparent 40%
+    ),
+    linear-gradient(
+      145deg,
+      #1c0803,
+      #351106,
+      #1b0703
+    );
+}
+
+
+/* Chocolate glow */
+
+.register-showcase::before {
+  content: "";
+  position: absolute;
+
+  width: 420px;
+  height: 420px;
+
+  left: -160px;
+  bottom: -230px;
+
+  border-radius: 50%;
+
+  background: radial-gradient(
+    circle,
+    rgba(126, 45, 12, 0.8),
+    transparent 68%
+  );
+
+  filter: blur(10px);
+}
+
+
+/* Gold glow */
+
+.register-showcase::after {
+  content: "";
+  position: absolute;
+
+  width: 350px;
+  height: 350px;
+
+  right: -150px;
+  top: -150px;
+
+  border-radius: 50%;
+
+  background: radial-gradient(
+    circle,
+    rgba(255, 174, 65, 0.15),
+    transparent 70%
+  );
+}
+
+
+/* =====================================================
+   LEFT CONTENT
+   ===================================================== */
+
+.register-showcase-content {
+  position: relative;
+  z-index: 5;
+
+  width: 100%;
+  max-width: 600px;
+}
+
+
+/* =====================================================
+   LOGO
+   ===================================================== */
+
+.register-logo {
+  width: 62px;
+  height: 62px;
+
+  border-radius: 15px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: linear-gradient(
+    135deg,
+    #ffd56b,
+    #ffb52e
+  );
+
+  box-shadow:
+    0 0 25px rgba(255, 187, 61, 0.35);
+
+  margin-bottom: 35px;
+}
+
+.register-logo span {
+  font-size: 25px;
+  font-weight: 900;
+  color: #431606;
+}
+
+
+/* =====================================================
+   BRAND SMALL TEXT
+   ===================================================== */
+
+.register-showcase-subtitle {
+  color: #ffc13e;
+
+  font-size: 14px;
+  font-weight: 800;
+
+  letter-spacing: 4px;
+
+  text-transform: uppercase;
+
+  margin-bottom: 18px;
+}
+
+
+/* =====================================================
+   MAIN TITLE
+   ===================================================== */
+
+.register-showcase h1 {
+  margin: 0;
+
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
+
+  font-size: clamp(48px, 5vw, 72px);
+
+  line-height: 1.02;
+
+  font-weight: 500;
+
+  color: #ffffff;
+}
+
+.register-showcase h1::first-letter {
+  color: #ffffff;
+}
+
+
+/* =====================================================
+   SECOND TITLE
+   ===================================================== */
+
+.register-showcase h2 {
+  margin: 20px 0 24px;
+
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
+
+  font-size: 28px;
+
+  line-height: 1.2;
+
+  font-weight: 500;
+
+  color: #ffc34c;
+}
+
+
+/* =====================================================
+   DESCRIPTION
+   ===================================================== */
+
+.register-showcase p {
+  max-width: 520px;
+
+  margin: 0;
+
+  color: rgba(255, 255, 255, 0.82);
+
+  font-size: 16px;
+
+  line-height: 1.8;
+}
+
+
+/* =====================================================
+   ANIMATED TEXT
+   ===================================================== */
+
+.animated-text {
+  display: inline-block;
+
+  color: #ffc13d;
+
+  animation:
+    textGlow 2.5s ease-in-out infinite alternate,
+    textFloat 3s ease-in-out infinite;
+}
+
+@keyframes textGlow {
+  from {
+    text-shadow:
+      0 0 5px rgba(255, 181, 48, 0.25);
+  }
+
+  to {
+    text-shadow:
+      0 0 20px rgba(255, 181, 48, 0.75);
+  }
+}
+
+@keyframes textFloat {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-4px);
+  }
+}
+
+
+/* =====================================================
+   FEATURE CARDS
+   ===================================================== */
+
+.register-features {
+  margin-top: 38px;
+
+  display: grid;
+
+  grid-template-columns:
+    repeat(3, 1fr);
+
+  gap: 14px;
+}
+
+
+.register-feature {
+  min-height: 145px;
+
+  padding: 20px 16px;
+
+  border-radius: 18px;
+
+  border: 1px solid rgba(255, 175, 57, 0.28);
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(255, 255, 255, 0.08),
+      rgba(255, 255, 255, 0.025)
+    );
+
+  backdrop-filter: blur(12px);
+
+  transition:
+    transform 0.35s ease,
+    border-color 0.35s ease,
+    box-shadow 0.35s ease;
+
+  animation: cardFloat 4s ease-in-out infinite;
+}
+
+.register-feature:nth-child(2) {
+  animation-delay: 0.5s;
+}
+
+.register-feature:nth-child(3) {
+  animation-delay: 1s;
+}
+
+.register-feature:hover {
+  transform: translateY(-10px) scale(1.02);
+
+  border-color: rgba(255, 193, 61, 0.75);
+
+  box-shadow:
+    0 15px 35px rgba(0, 0, 0, 0.35),
+    0 0 25px rgba(255, 174, 44, 0.12);
+}
+
+@keyframes cardFloat {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-5px);
+  }
+}
+
+
+/* =====================================================
+   FEATURE ICON
+   React Icons can use this class
+   ===================================================== */
+
+.feature-icon {
+  width: 45px;
+  height: 45px;
+
+  border-radius: 14px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  margin-bottom: 15px;
+
+  font-size: 22px;
+
+  background: rgba(255, 177, 42, 0.12);
+
+  color: #ffc13d;
+
+  box-shadow:
+    0 0 20px rgba(255, 179, 51, 0.12);
+
+  animation: iconPulse 2s infinite;
+}
+
+@keyframes iconPulse {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.08);
+  }
+}
+
+
+.register-feature strong {
+  display: block;
+
+  color: #ffffff;
+
+  font-size: 15px;
+
+  margin-bottom: 8px;
+}
+
+.register-feature span {
+  color: rgba(255, 255, 255, 0.60);
+
+  font-size: 12px;
+
+  line-height: 1.5;
+}
+
+
+/* =====================================================
+   RIGHT FORM AREA
+   ===================================================== */
+
+.register-form-area {
+  min-height: 850px;
+
+  padding: 35px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.98),
+      rgba(255, 249, 240, 0.98)
+    );
+}
+
+
+/* =====================================================
+   WHITE REGISTER CARD
+   ===================================================== */
+
+.register-card {
+  width: 100%;
+  max-width: 450px;
+
+  padding: 38px 42px;
+
+  background: #ffffff;
+
+  border-radius: 25px;
+
+  box-shadow:
+    0 25px 60px rgba(56, 24, 8, 0.18);
+
+  position: relative;
+
+  animation: formAppear 0.8s ease forwards;
+}
+
+@keyframes formAppear {
+  from {
+    opacity: 0;
+    transform: translateY(25px) scale(0.98);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+
+/* =====================================================
+   REGISTER ICON
+   ===================================================== */
+
+.register-icon {
+  width: 58px;
+  height: 58px;
+
+  margin: 0 auto 15px;
+
+  border-radius: 50%;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  background: #fff3e7;
+
+  color: #8d350e;
+
+  font-size: 25px;
+
+  box-shadow:
+    0 8px 25px rgba(142, 55, 15, 0.10);
+}
+
+
+/* =====================================================
+   BRAND NAME
+   ===================================================== */
+
+.register-card .brand-name {
+  text-align: center;
+
+  color: #0b91c1;
+
+  font-size: 12px;
+
+  font-weight: 900;
+
+  letter-spacing: 5px;
+
+  margin-bottom: 10px;
+}
+
+
+/* =====================================================
+   FORM TITLE
+   ===================================================== */
+
+.register-card h2 {
+  margin: 0;
+
+  text-align: center;
+
+  color: #4b1b0a;
+
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
+
+  font-size: 34px;
+
+  font-weight: 500;
+}
+
+
+/* =====================================================
+   FORM SUBTITLE
+   ===================================================== */
+
+.register-card .form-subtitle {
+  margin: 10px 0 27px;
+
+  text-align: center;
+
+  color: #727272;
+
+  font-size: 13px;
+}
+
+
+/* =====================================================
+   FORM GROUP
+   ===================================================== */
+
+.register-form-group {
+  margin-bottom: 15px;
+}
+
+
+/* =====================================================
+   LABEL
+   ===================================================== */
+
+.register-form-group label {
+  display: flex;
+
+  align-items: center;
+
+  gap: 6px;
+
+  margin-bottom: 7px;
+
+  color: #294e6b;
+
+  font-size: 14px;
+
+  font-weight: 800;
+}
+
+
+/* =====================================================
+   INPUT
+   ===================================================== */
+
+.register-form-group input {
+  width: 100%;
+
+  height: 49px;
+
+  padding: 0 14px;
+
+  border-radius: 10px;
+
+  border: 1px solid #e4c7a1;
+
+  outline: none;
+
+  background: #ffffff;
+
+  color: #333333;
+
+  font-size: 14px;
+
+  transition:
+    0.25s ease;
+}
+
+.register-form-group input::placeholder {
+  color: #999999;
+}
+
+.register-form-group input:hover {
+  border-color: #c99155;
+}
+
+.register-form-group input:focus {
+  border-color: #119bc7;
+
+  box-shadow:
+    0 0 0 3px rgba(17, 155, 199, 0.10);
+}
+
+
+/* =====================================================
+   PASSWORD
+   ===================================================== */
+
+.password-field {
+  position: relative;
+}
+
+.password-field input {
+  padding-right: 45px;
+}
+
+.password-toggle {
+  position: absolute;
+
+  right: 12px;
+  top: 50%;
+
+  transform: translateY(-50%);
+
+  border: none;
+
+  background: transparent;
+
+  cursor: pointer;
+
+  color: #617d94;
+
+  font-size: 17px;
+
+  padding: 4px;
+}
+
+.password-toggle:hover {
+  color: #8d350e;
+}
+
+
+/* =====================================================
+   CREATE ACCOUNT
+   ===================================================== */
+
+.register-submit {
+  width: 100%;
+
+  height: 50px;
+
+  margin-top: 5px;
+
+  border: none;
+
+  border-radius: 10px;
+
+  cursor: pointer;
+
+  color: #ffffff;
+
+  font-size: 16px;
+
+  font-weight: 800;
+
+  background:
+    linear-gradient(
+      135deg,
+      #8e350c,
+      #5d1e07
+    );
+
+  box-shadow:
+    0 10px 25px rgba(117, 42, 8, 0.22);
+
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.register-submit:hover {
+  transform: translateY(-2px);
+
+  box-shadow:
+    0 15px 30px rgba(117, 42, 8, 0.30);
+}
+
+.register-submit:active {
+  transform: translateY(0);
+}
+
+
+/* =====================================================
+   LOGIN LINK
+   ===================================================== */
+
+.register-login-link {
+  margin-top: 17px;
+
+  text-align: center;
+
+  color: #707070;
+
+  font-size: 14px;
+}
+
+.register-login-link a {
+  color: #8d350e;
+
+  font-weight: 800;
+
+  text-decoration: none;
+}
+
+.register-login-link a:hover {
+  text-decoration: underline;
+}
+
+
+/* =====================================================
+   ERROR
+   ===================================================== */
+
+.register-error {
+  margin-bottom: 12px;
+
+  padding: 10px 12px;
+
+  border-radius: 9px;
+
+  color: #b42318;
+
+  background: #fff1f1;
+
+  border: 1px solid #f3b5b5;
+
+  font-size: 13px;
+}
+
+
+/* =====================================================
+   SUCCESS
+   ===================================================== */
+
+.register-success {
+  margin-bottom: 12px;
+
+  padding: 10px 12px;
+
+  border-radius: 9px;
+
+  color: #067647;
+
+  background: #ecfdf3;
+
+  border: 1px solid #abefc6;
+
+  font-size: 13px;
+}
+
+
+/* =====================================================
+   FLOATING CHOCOLATE PARTICLES
+   ===================================================== */
+
+.choco-particle {
+  position: absolute;
+
+  width: 10px;
+  height: 10px;
+
+  border-radius: 50%;
+
+  background: #8d350e;
+
+  opacity: 0.7;
+
+  animation: particleMove 6s infinite ease-in-out;
+}
+
+@keyframes particleMove {
+  0% {
+    transform:
+      translateY(0)
+      rotate(0deg);
+
+    opacity: 0.3;
+  }
+
+  50% {
+    transform:
+      translateY(-35px)
+      rotate(180deg);
+
+    opacity: 0.9;
+  }
+
+  100% {
+    transform:
+      translateY(0)
+      rotate(360deg);
+
+    opacity: 0.3;
+  }
+}
+
+
+/* =====================================================
+   TABLET
+   ===================================================== */
+
+@media (max-width: 1100px) {
+
+  .register-container {
+    grid-template-columns: 1fr 480px;
+  }
+
+  .register-showcase {
+    padding: 45px 35px;
+  }
+
+  .register-form-area {
+    padding: 25px;
+  }
+
+  .register-card {
+    padding: 32px;
+  }
+}
+
+
+/* =====================================================
+   MOBILE
+   ===================================================== */
+
+@media (max-width: 850px) {
+
+  .register-page {
+    padding: 15px;
+  }
+
+  .register-container {
+    display: block;
+
+    min-height: auto;
+
+    border-radius: 22px;
+  }
+
+  .register-showcase {
+    min-height: auto;
+
+    padding: 45px 25px;
+  }
+
+  .register-showcase-content {
+    text-align: center;
+  }
+
+  .register-logo {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .register-showcase h1 {
+    font-size: 48px;
+  }
+
+  .register-showcase p {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .register-features {
+    grid-template-columns: 1fr;
+  }
+
+  .register-feature {
+    min-height: auto;
+  }
+
+  .register-form-area {
+    min-height: auto;
+
+    padding: 25px 15px;
+  }
+
+  .register-card {
+    max-width: 500px;
+  }
+}
+
+
+/* =====================================================
+   SMALL MOBILE
+   ===================================================== */
+
+@media (max-width: 480px) {
+
+  .register-page {
+    padding: 8px;
+  }
+
+  .register-showcase {
+    padding: 35px 18px;
+  }
+
+  .register-showcase h1 {
+    font-size: 40px;
+  }
+
+  .register-showcase h2 {
+    font-size: 23px;
+  }
+
+  .register-showcase p {
+    font-size: 14px;
+  }
+
+  .register-card {
+    padding: 28px 20px;
+
+    border-radius: 20px;
+  }
+
+  .register-card h2 {
+    font-size: 29px;
+  }
+
+  .register-form-group input {
+    height: 47px;
+  }
+}
