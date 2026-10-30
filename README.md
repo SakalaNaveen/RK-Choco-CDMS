@@ -1,138 +1,137 @@
-\# RK Choco – Chocolate Distribution Management System
+# 🍫 RK Choco
+### Premium Chocolate Distribution Management System
+
+<p align="center">
+  A modern web-based platform to manage chocolate products, customers, orders and business operations.
+</p>
+
+<p align="center">
+  <img src="https://img.shields.io/badge/Project-RK%20Choco-6B3E26?style=for-the-badge" />
+  <img src="https://img.shields.io/badge/Frontend-React-blue?style=for-the-badge&logo=react" />
+  <img src="https://img.shields.io/badge/Backend-Node.js-green?style=for-the-badge&logo=node.js" />
+  <img src="https://img.shields.io/badge/Database-MongoDB-brightgreen?style=for-the-badge&logo=mongodb" />
+</p>
+
+---
 
+## 🌟 About the Project
 
+**RK Choco** is a Chocolate Distribution Management System developed to simplify chocolate distribution business operations.
 
-\*\*India's Trusted Chocolate Distributor\*\*
+The application provides a customer shopping experience and an admin dashboard to manage products, customers, orders and sales reports.
 
+## ✨ Key Features
 
+### 🛍️ Customer Website
+- Customer Registration and Login
+- Customer Profile Management
+- Browse Chocolate Products
+- Shopping Cart Management
+- Place Orders
+- View Order History
+- Order Cancellation
 
-RK Choco is a web-based Chocolate Distribution Management System developed to manage chocolate products, customers, orders, and business reports.
+### 🛠️ Admin Dashboard
+- Admin Authentication
+- Customer Management
+- Product Management
+- Order Management
+- Sales and Business Reports
+- MongoDB Database Integration
 
+## 💻 Technology Stack
 
+| Category | Technologies |
+|---|---|
+| Frontend | React.js, HTML, CSS, JavaScript |
+| Backend | Node.js, Express.js |
+| Database | MongoDB Atlas |
+| Authentication | Express Session, bcryptjs |
+| Tools | Git, GitHub, VS Code |
 
-\## Features
+## 📂 Project Structure
 
+```text
+RK-Choco-CDMS/
+│
+├── backend/
+│   ├── data/
+│   ├── server.js
+│   └── package.json
+│
+├── frontend/
+│   ├── public/
+│   │   └── admin/
+│   ├── src/
+│   └── package.json
+│
+├── screenshots/
+├── .gitignore
+└── README.md
+```
 
+## ⚙️ Installation and Setup
 
-\- Customer Registration and Login
+### 1. Clone the Repository
 
-\- Customer Profile Management
+```bash
+git clone https://github.com/SakalaNaveen/RK-Choco-CDMS.git
+```
 
-\- Chocolate Product Listing
+### 2. Open Project Folder
 
-\- Shopping Cart
+```bash
+cd RK-Choco-CDMS
+```
 
-\- Order Placement and Order Management
+### 3. Install Backend Dependencies
 
-\- Order Cancellation
+```bash
+cd backend
+npm install
+```
 
-\- Admin Dashboard
+### 4. Configure Environment Variables
 
-\- Customer Management
+Create a `.env` file inside the backend folder and configure your MongoDB connection, session secret, admin credentials and email settings.
 
-\- Product Management
+Never upload your actual `.env` file or passwords to GitHub.
 
-\- Order Management
+### 5. Start Backend
 
-\- Sales Reports
+```bash
+node server.js
+```
 
-\- MongoDB Database Integration
+### 6. Start Frontend
 
-\- Secure Password Hashing and Session Management
+Open another terminal:
 
+```bash
+cd frontend
+npm install
+npm start
+```
 
+## 🗄️ Database
 
-\## Technologies Used
+RK Choco uses **MongoDB Atlas** to store application data, including customer accounts, products and orders.
 
+## 🎯 Project Objective
 
+The main objective is to develop a user-friendly and efficient chocolate distribution platform that simplifies business management and improves order processing.
 
-\*\*Frontend\*\*
+## 👨‍💻 Developer
 
-\- React.js
+**S. Naveen**
 
-\- HTML
+- GitHub: [SakalaNaveen](https://github.com/SakalaNaveen)
+- Project Repository: [RK Choco CDMS](https://github.com/SakalaNaveen/RK-Choco-CDMS)
 
-\- CSS
+---
 
-\- JavaScript
-
-
-
-\*\*Backend\*\*
-
-\- Node.js
-
-\- Express.js
-
-
-
-\*\*Database\*\*
-
-\- MongoDB Atlas
-
-
-
-\*\*Other Tools\*\*
-
-\- Git
-
-\- GitHub
-
-\- Visual Studio Code
-
-
-
-\## Project Structure
-
-
-
-\- `frontend/` – Customer website and admin interface
-
-\- `backend/` – Express server and API
-
-\- `backend/server.js` – Backend application
-
-
-
-\## How to Run the Project
-
-
-
-1\. Clone the repository.
-
-2\. Install frontend and backend dependencies.
-
-3\. Configure environment variables in `backend/.env`.
-
-4\. Start the backend server.
-
-5\. Start the frontend React application.
-
-
-
-\## Database
-
-
-
-This project uses MongoDB Atlas to store customer, product, and order information.
-
-
-
-\## Developer
-
-
-
-\*\*S. Naveen\*\*
-
-
-
-GitHub: https://github.com/SakalaNaveen
-
-
-
-\## License
-
-
-
-This project is developed for educational and portfolio purposes.
-
+<p align="center">
+  <b>RK Choco – India's Trusted Chocolate Distributor 🍫</b>
+  <br/>
+  Built with passion and dedication.
+</p>
