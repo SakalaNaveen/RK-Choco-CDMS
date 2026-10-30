@@ -138,9 +138,7 @@ app.use(
 app.use(
   session({
     name: "rkChocoAdminSession",
-    secret:
-      process.env.SESSION_SECRET ||
-      "rk-choco-development-secret-change-before-deployment",
+    secret: process.env.SESSION_SECRET,
     resave: false,
     saveUninitialized: false,
     cookie: {
@@ -151,7 +149,6 @@ app.use(
     }
   })
 );
-
 /* =========================================================
    DATABASE AND HELPERS
 ========================================================= */
