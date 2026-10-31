@@ -87,18 +87,27 @@ const uploadProductImage = multer({
   }
 });
 
+
 /* =========================================================
    CORS
 ========================================================= */
 
+const allowedOrigins = [
+  "https://rk-choco-frontend.onrender.com",
+  "http://localhost:3000",
+  "http://127.0.0.1:3000",
+  "http://192.168.29.199:3000"
+];
+
 app.use((req, res, next) => {
   const origin = req.headers.origin;
 
-  const allowed =
-    typeof origin === "string" &&
-    /^http:\/\/(localhost|127\.0\.0\.1|192\.168\.\d{1,3}\.\d{1,3}|10\.\d{1,3}\.\d{1,3}\.\d{1,3}|172\.(1[6-9]|2\d|3[01])\.\d{1,3}\.\d{1,3})(:\d+)?$/.test(origin);
+  const isAllowed =
+    !origin ||
+    allowedOrigins.includes(origin) ||
+    /^https?:\/\/(10\.\d{1,3}\.\d{1,3}\.\d{1,3}|172\.(1[6-9]|2\d|3[01])\.\d{1,3}\.\d{1,3}|192\.168\.\d{1,3}\.\d{1,3})(:\d+)?$/.test(origin);
 
-  if (allowed) {
+  if (origin && isAllowed) {
     res.setHeader("Access-Control-Allow-Origin", origin);
     res.setHeader("Access-Control-Allow-Credentials", "true");
     res.setHeader(
@@ -121,6 +130,7 @@ app.use((req, res, next) => {
 
 app.use(express.json({ limit: "1mb" }));
 app.use(express.urlencoded({ extended: true }));
+
 
 /* =========================================================
    SERVE UPLOADED PRODUCT IMAGES
@@ -149,6 +159,7 @@ app.use(
     }
   })
 );
+
 /* =========================================================
    DATABASE AND HELPERS
 ========================================================= */
