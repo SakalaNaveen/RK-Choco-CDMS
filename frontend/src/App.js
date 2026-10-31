@@ -45,7 +45,7 @@ import Products from "./components/products/Products";
 
 const CART_KEY = "rkChocoCart";
 const ORDER_KEY = "rkChocoOrder";
-const API_BASE = "http://localhost:5000/api";
+const API_BASE = "https://rk-choco-cdms.onrender.com/api";
 
 async function apiRequest(endpoint, options = {}) {
   const response = await fetch(`${API_BASE}${endpoint}`, {

@@ -15,9 +15,8 @@ import oreo from "../../assets/images/oreo.png";
 import milkybar from "../../assets/images/milkybar.png";
 import perk from "../../assets/images/perk.png";
 
-const API_URL = "http://localhost:5000/api/products";
-const BACKEND_URL = "http://localhost:5000";
-
+const API_URL = "https://rk-choco-cdms.onrender.com/api/products";
+const BACKEND_URL = "https://rk-choco-cdms.onrender.com";
 const imageMap = {
   dairymilk: dairyMilk,
   kitkat: kitkat,
