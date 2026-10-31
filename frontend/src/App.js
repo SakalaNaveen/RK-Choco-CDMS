@@ -210,6 +210,7 @@ const cardStyle = {
     "0 15px 40px rgba(80,42,20,0.10)"
 };
 
+
 /* =========================================================
    NAVBAR
 ========================================================= */
@@ -226,11 +227,19 @@ function Navbar() {
       try {
         const result = await apiRequest("/customers/session");
 
+        console.log("Customer session:", result);
+
         if (active) {
-          setLoggedIn(Boolean(result.success && result.customer));
+          setLoggedIn(
+            Boolean(result?.success && result?.customer)
+          );
         }
       } catch (error) {
-        if (active) setLoggedIn(false);
+        console.error("Navbar session check failed:", error);
+
+        if (active) {
+          setLoggedIn(false);
+        }
       }
     };
 
@@ -411,37 +420,6 @@ function Navbar() {
   );
 }
 
-function NavButton({
-  icon,
-  text,
-  active,
-  onClick
-}) {
-  return (
-    <button
-      onClick={onClick}
-      style={{
-        border: active
-          ? "1px solid #f0c66d"
-          : "1px solid rgba(255,255,255,0.12)",
-        background: active
-          ? "rgba(247,213,139,0.18)"
-          : "rgba(255,255,255,0.05)",
-        color: active ? "#f8d789" : "#fff",
-        borderRadius: "10px",
-        padding: "10px 13px",
-        fontWeight: 800,
-        cursor: "pointer",
-        display: "flex",
-        alignItems: "center",
-        gap: "7px"
-      }}
-    >
-      {icon}
-      {text}
-    </button>
-  );
-}
 /* =========================================================
    BACK BUTTON
 ========================================================= */
