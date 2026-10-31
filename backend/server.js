@@ -1118,9 +1118,9 @@ app.post("/api/admin/forgot-password", async (req, res) => {
 
     const admin = readAdmin();
 
-    const adminEmail = String(admin?.email || "")
-      .trim()
-      .toLowerCase();
+    const adminEmail = String(
+      admin?.email || process.env.ADMIN_EMAIL || ""
+    ).trim().toLowerCase();
 
     if (!adminEmail || email !== adminEmail) {
       return res.json({
@@ -1223,7 +1223,6 @@ app.post("/api/admin/forgot-password", async (req, res) => {
     });
   }
 });
-
 
 /* =========================================================
    ADMIN RESET PASSWORD
