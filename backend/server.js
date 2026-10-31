@@ -1087,12 +1087,10 @@ app.post("/api/admin/logout", (req, res) => {
 });
 
 /* =========================================================
-   ADMIN FORGOT PASSWORD
+   ADMIN FORGOT PASSWORD - RESEND API
 ========================================================= */
 
 app.post("/api/admin/forgot-password", async (req, res) => {
-  let mailer;
-
   try {
     const email = String(req.body?.email || "")
       .trim()
@@ -1105,28 +1103,21 @@ app.post("/api/admin/forgot-password", async (req, res) => {
       });
     }
 
-    const smtpEmail = String(
-      process.env.EMAIL_USER || process.env.SMTP_EMAIL || ""
+    const resendApiKey = String(
+      process.env.RESEND_API_KEY || ""
     ).trim();
 
-    const smtpPassword = String(
-      process.env.EMAIL_APP_PASSWORD ||
-      process.env.SMTP_APP_PASSWORD ||
-      ""
-    ).replace(/\s/g, "");
-
-    if (!smtpEmail || !smtpPassword) {
-      console.error(
-        "Admin forgot password: Gmail environment settings are missing."
-      );
+    if (!resendApiKey) {
+      console.error("RESEND_API_KEY is missing.");
 
       return res.status(500).json({
         success: false,
-        message: "Email is not configured. Check backend .env settings."
+        message: "Email service is not configured."
       });
     }
 
     const admin = readAdmin();
+
     const adminEmail = String(admin?.email || "")
       .trim()
       .toLowerCase();
@@ -1138,56 +1129,79 @@ app.post("/api/admin/forgot-password", async (req, res) => {
       });
     }
 
-    mailer = nodemailer.createTransport({
-      service: "gmail",
-      auth: {
-        user: smtpEmail,
-        pass: smtpPassword
-      },
-      connectionTimeout: 20000,
-      greetingTimeout: 20000,
-      socketTimeout: 20000
-    });
-
-    await mailer.verify();
-
     const token = crypto.randomBytes(32).toString("hex");
+
+    const baseUrl = String(
+      process.env.ADMIN_RESET_BASE_URL ||
+      process.env.RENDER_EXTERNAL_URL ||
+      "https://rk-choco-cdms.onrender.com"
+    ).replace(/\/+$/, "");
+
+    const resetUrl =
+      `${baseUrl}/admin/reset-password.html?token=${token}`;
+
+    const emailResponse = await fetch(
+      "https://api.resend.com/emails",
+      {
+        method: "POST",
+        headers: {
+          "Authorization": `Bearer ${resendApiKey}`,
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          from: "RK Choco Admin <onboarding@resend.dev>",
+          to: [adminEmail],
+          subject: "RK Choco Admin - Reset Your Password",
+          text:
+            "A password reset was requested for your RK Choco Admin account.\n\n" +
+            `Open this link to set a new password:\n${resetUrl}\n\n` +
+            "This link expires in 15 minutes. If you did not request this, ignore this email.",
+          html: `
+            <div style="font-family:Arial,sans-serif;max-width:600px;margin:auto;padding:24px;border:1px solid #eee;border-radius:12px">
+              <h2 style="color:#542b19">RK Choco Admin</h2>
+              <p>A password reset was requested for your admin account.</p>
+              <p>
+                <a href="${resetUrl}"
+                   style="display:inline-block;background:#542b19;color:#fff;padding:12px 20px;text-decoration:none;border-radius:6px">
+                  Reset Password
+                </a>
+              </p>
+              <p>If the button does not work, open this link:</p>
+              <p style="word-break:break-all">${resetUrl}</p>
+              <p>This link expires in 15 minutes.</p>
+              <p>If you did not request this, you can ignore this email.</p>
+            </div>
+          `
+        })
+      }
+    );
+
+    const responseText = await emailResponse.text();
+
+    let resendResult = {};
+
+    try {
+      resendResult = responseText ? JSON.parse(responseText) : {};
+    } catch {
+      resendResult = { message: responseText };
+    }
+
+    if (!emailResponse.ok) {
+      console.error(
+        "Resend API error:",
+        emailResponse.status,
+        resendResult
+      );
+
+      return res.status(500).json({
+        success: false,
+        message: "Could not send the reset email. Please check Resend settings."
+      });
+    }
 
     resetTokens.set(token, {
       email: adminEmail,
       expiresAt: Date.now() + 15 * 60 * 1000
-    });
-
-    const resetUrl =
-      `http://localhost:${PORT}/admin/reset-password.html?token=${token}`;
-
-    await mailer.sendMail({
-      from: {
-        name: "RK Choco Admin",
-        address: smtpEmail
-      },
-      to: adminEmail,
-      subject: "RK Choco Admin - Reset Your Password",
-      text:
-        `A password reset was requested for your RK Choco Admin account.\n\n` +
-        `Open this link to set a new password:\n${resetUrl}\n\n` +
-        `This link expires in 15 minutes. If you did not request this, ignore this email.`,
-      html: `
-        <div style="font-family:Arial,sans-serif;max-width:600px;margin:auto;padding:24px;border:1px solid #eee;border-radius:12px">
-          <h2 style="color:#542b19">RK Choco Admin</h2>
-          <p>A password reset was requested for your admin account.</p>
-          <p>
-            <a href="${resetUrl}"
-               style="display:inline-block;background:#542b19;color:#fff;padding:12px 20px;text-decoration:none;border-radius:6px">
-              Reset Password
-            </a>
-          </p>
-          <p>If the button does not work, open this link:</p>
-          <p style="word-break:break-all">${resetUrl}</p>
-          <p>This link expires in 15 minutes.</p>
-          <p>If you did not request this, you can ignore this email.</p>
-        </div>
-      `
     });
 
     console.log("Admin password reset email sent successfully.");
@@ -1196,22 +1210,17 @@ app.post("/api/admin/forgot-password", async (req, res) => {
       success: true,
       message: "Password reset link sent. Please check your inbox and spam folder."
     });
+
   } catch (error) {
     console.error(
-      "Admin forgot password SMTP error:",
-      error.code || "ERROR",
+      "Admin forgot password Resend error:",
       error.message
     );
 
     return res.status(500).json({
       success: false,
-      message:
-        "Could not send the reset email. Check the backend terminal for the SMTP error."
+      message: "Could not send the reset email. Please try again."
     });
-  } finally {
-    if (mailer) {
-      mailer.close();
-    }
   }
 });
 
