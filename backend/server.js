@@ -37,6 +37,7 @@ if (!MONGODB_URI) {
 }
 
 app.disable("x-powered-by");
+app.set("trust proxy", 1);
 
 /* =========================================================
    PRODUCT IMAGE UPLOAD CONFIGURATION
